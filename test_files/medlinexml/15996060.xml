@@ -1,0 +1,242 @@
+<PubmedArticleSet>
+<PubmedArticle>
+<MedlineCitation Status="MEDLINE" Owner="NLM">
+<PMID Version="1">15996060</PMID>
+<DateCompleted>
+<Year>2005</Year>
+<Month>08</Month>
+<Day>23</Day>
+</DateCompleted>
+<DateRevised>
+<Year>2015</Year>
+<Month>11</Month>
+<Day>19</Day>
+</DateRevised>
+<Article PubModel="Print">
+<Journal>
+<ISSN IssnType="Print">0315-162X</ISSN>
+<JournalIssue CitedMedium="Print">
+<Volume>32</Volume>
+<Issue>7</Issue>
+<PubDate>
+<Year>2005</Year>
+<Month>Jul</Month>
+</PubDate>
+</JournalIssue>
+<Title>The Journal of rheumatology</Title>
+<ISOAbbreviation>J Rheumatol</ISOAbbreviation>
+</Journal>
+<ArticleTitle>Sex hormone concentrations in patients with rheumatoid arthritis are not normalized during 12 weeks of anti-tumor necrosis factor therapy.</ArticleTitle>
+<Pagination>
+<MedlinePgn>1253-8</MedlinePgn>
+</Pagination>
+<Abstract>
+<AbstractText Label="OBJECTIVE" NlmCategory="OBJECTIVE">Androgens such as dehydroepiandrosterone sulfate (DHEAS) and testosterone are markedly lower in postmenopausal women with rheumatoid arthritis (RA) than in controls. In contrast, compared to controls, serum levels of estrogens are normal or elevated in women with RA. Since tumor necrosis factor (TNF) alters production of these hormones, we investigated changes of these hormones during anti-TNF antibody (anti-TNF) therapy with adalimumab in longstanding RA.</AbstractText>
+<AbstractText Label="METHODS" NlmCategory="METHODS">In this longitudinal anti-TNF therapy study in 13 patients with long-standing RA without prior prednisolone (7 infusions of anti-TNF: Week 0, 2, 4, 6, 8, 10, and 12), we measured serum concentrations of interleukin 6 (IL-6), androstenedione, DHEA, DHEAS, free testosterone, estrone, and 17ss-estradiol. Levels of these hormones in patients were compared to serum levels of 31 age and sex matched healthy controls.</AbstractText>
+<AbstractText Label="RESULTS" NlmCategory="RESULTS">Upon treatment with anti-TNF, there was an impressive decrease of clinical markers of inflammation, erythrocyte sedimentation rate, and serum levels of IL-6. Serum levels of DHEAS and free testosterone were markedly lower at baseline in patients compared to controls, but this did not change during anti-TNF therapy. Serum levels of DHEA and 17ss-estradiol were significantly elevated in patients compared to controls, but similarly, anti-TNF therapy did not change initially increased levels. Molar ratios of hormones, which reflect hormone shifts via converting enzymes, showed typical alterations at baseline, but did not change markedly during anti-TNF therapy.</AbstractText>
+<AbstractText Label="CONCLUSION" NlmCategory="CONCLUSIONS">Longterm therapy with anti-TNF did not change altered serum levels of typical sex hormones in patients with RA, although baseline values were largely different. In patients with RA, this indicates that alterations of sex hormones and altered activity of respective converting enzymes are imprinted for a long-lasting period over at least 12 weeks.</AbstractText>
+</Abstract>
+<AuthorList CompleteYN="Y">
+<Author ValidYN="Y">
+<LastName>Straub</LastName>
+<ForeName>Rainer H</ForeName>
+<Initials>RH</Initials>
+<AffiliationInfo>
+<Affiliation>Department of Internal Medicine I, Laboratory of Neuroendocrinoimmunology, University Medical Center, Regensburg, Germany. rainer.straub@klinik.uni-regensburg.de</Affiliation>
+</AffiliationInfo>
+</Author>
+<Author ValidYN="Y">
+<LastName>Härle</LastName>
+<ForeName>Peter</ForeName>
+<Initials>P</Initials>
+</Author>
+<Author ValidYN="Y">
+<LastName>Atzeni</LastName>
+<ForeName>Fabiola</ForeName>
+<Initials>F</Initials>
+</Author>
+<Author ValidYN="Y">
+<LastName>Weidler</LastName>
+<ForeName>Claudia</ForeName>
+<Initials>C</Initials>
+</Author>
+<Author ValidYN="Y">
+<LastName>Cutolo</LastName>
+<ForeName>Maurizio</ForeName>
+<Initials>M</Initials>
+</Author>
+<Author ValidYN="Y">
+<LastName>Sarzi-Puttini</LastName>
+<ForeName>Piercarlo</ForeName>
+<Initials>P</Initials>
+</Author>
+</AuthorList>
+<Language>eng</Language>
+<PublicationTypeList>
+<PublicationType UI="D016430">Clinical Trial</PublicationType>
+<PublicationType UI="D018848">Controlled Clinical Trial</PublicationType>
+<PublicationType UI="D016428">Journal Article</PublicationType>
+<PublicationType UI="D013485">Research Support, Non-U.S. Gov't</PublicationType>
+</PublicationTypeList>
+</Article>
+<MedlineJournalInfo>
+<Country>Canada</Country>
+<MedlineTA>J Rheumatol</MedlineTA>
+<NlmUniqueID>7501984</NlmUniqueID>
+<ISSNLinking>0315-162X</ISSNLinking>
+</MedlineJournalInfo>
+<ChemicalList>
+<Chemical>
+<RegistryNumber>0</RegistryNumber>
+<NameOfSubstance UI="D000911">Antibodies, Monoclonal</NameOfSubstance>
+</Chemical>
+<Chemical>
+<RegistryNumber>0</RegistryNumber>
+<NameOfSubstance UI="D061067">Antibodies, Monoclonal, Humanized</NameOfSubstance>
+</Chemical>
+<Chemical>
+<RegistryNumber>0</RegistryNumber>
+<NameOfSubstance UI="D018501">Antirheumatic Agents</NameOfSubstance>
+</Chemical>
+<Chemical>
+<RegistryNumber>0</RegistryNumber>
+<NameOfSubstance UI="D012739">Gonadal Steroid Hormones</NameOfSubstance>
+</Chemical>
+<Chemical>
+<RegistryNumber>0</RegistryNumber>
+<NameOfSubstance UI="D015850">Interleukin-6</NameOfSubstance>
+</Chemical>
+<Chemical>
+<RegistryNumber>0</RegistryNumber>
+<NameOfSubstance UI="D014409">Tumor Necrosis Factor-alpha</NameOfSubstance>
+</Chemical>
+<Chemical>
+<RegistryNumber>2DI9HA706A</RegistryNumber>
+<NameOfSubstance UI="D004970">Estrone</NameOfSubstance>
+</Chemical>
+<Chemical>
+<RegistryNumber>3XMK78S47O</RegistryNumber>
+<NameOfSubstance UI="D013739">Testosterone</NameOfSubstance>
+</Chemical>
+<Chemical>
+<RegistryNumber>409J2J96VR</RegistryNumber>
+<NameOfSubstance UI="D000735">Androstenedione</NameOfSubstance>
+</Chemical>
+<Chemical>
+<RegistryNumber>4TI98Z838E</RegistryNumber>
+<NameOfSubstance UI="D004958">Estradiol</NameOfSubstance>
+</Chemical>
+<Chemical>
+<RegistryNumber>57B09Q7FJR</RegistryNumber>
+<NameOfSubstance UI="D019314">Dehydroepiandrosterone Sulfate</NameOfSubstance>
+</Chemical>
+<Chemical>
+<RegistryNumber>FYS6T7F842</RegistryNumber>
+<NameOfSubstance UI="D000068879">Adalimumab</NameOfSubstance>
+</Chemical>
+</ChemicalList>
+<CitationSubset>IM</CitationSubset>
+<MeshHeadingList>
+<MeshHeading>
+<DescriptorName UI="D000068879" MajorTopicYN="N">Adalimumab</DescriptorName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D000368" MajorTopicYN="N">Aged</DescriptorName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D000735" MajorTopicYN="N">Androstenedione</DescriptorName>
+<QualifierName UI="Q000097" MajorTopicYN="N">blood</QualifierName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D000911" MajorTopicYN="N">Antibodies, Monoclonal</DescriptorName>
+<QualifierName UI="Q000008" MajorTopicYN="Y">administration &amp; dosage</QualifierName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D061067" MajorTopicYN="N">Antibodies, Monoclonal, Humanized</DescriptorName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D018501" MajorTopicYN="N">Antirheumatic Agents</DescriptorName>
+<QualifierName UI="Q000008" MajorTopicYN="Y">administration &amp;</QualifierName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D001172" MajorTopicYN="N">Arthritis, Rheumatoid</DescriptorName>
+<QualifierName UI="Q000097" MajorTopicYN="N">blood</QualifierName>
+<QualifierName UI="Q000188" MajorTopicYN="Y">drug therapy</QualifierName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D019314" MajorTopicYN="N">Dehydroepiandrosterone Sulfate</DescriptorName>
+<QualifierName UI="Q000097" MajorTopicYN="N">blood</QualifierName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D004958" MajorTopicYN="N">Estradiol</DescriptorName>
+<QualifierName UI="Q000097" MajorTopicYN="N">blood</QualifierName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D004970" MajorTopicYN="N">Estrone</DescriptorName>
+<QualifierName UI="Q000097" MajorTopicYN="N">blood</QualifierName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D005260" MajorTopicYN="N">Female</DescriptorName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D012739" MajorTopicYN="N">Gonadal Steroid Hormones</DescriptorName>
+<QualifierName UI="Q000097" MajorTopicYN="Y">blood</QualifierName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D006801" MajorTopicYN="N">Humans</DescriptorName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D015850" MajorTopicYN="N">Interleukin-6</DescriptorName>
+<QualifierName UI="Q000097" MajorTopicYN="N">blood</QualifierName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D008297" MajorTopicYN="N">Male</DescriptorName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D008875" MajorTopicYN="N">Middle Aged</DescriptorName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D013739" MajorTopicYN="N">Testosterone</DescriptorName>
+<QualifierName UI="Q000097" MajorTopicYN="N">blood</QualifierName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D016896" MajorTopicYN="N">Treatment Outcome</DescriptorName>
+</MeshHeading>
+<MeshHeading>
+<DescriptorName UI="D014409" MajorTopicYN="N">Tumor Necrosis Factor-alpha</DescriptorName>
+<QualifierName UI="Q000037" MajorTopicYN="Y">antagonists &amp; inhibitors</QualifierName>
+</MeshHeading>
+</MeshHeadingList>
+</MedlineCitation>
+<PubmedData>
+<History>
+<PubMedPubDate PubStatus="pubmed">
+<Year>2005</Year>
+<Month>7</Month>
+<Day>5</Day>
+<Hour>9</Hour>
+<Minute>0</Minute>
+</PubMedPubDate>
+<PubMedPubDate PubStatus="medline">
+<Year>2005</Year>
+<Month>8</Month>
+<Day>24</Day>
+<Hour>9</Hour>
+<Minute>0</Minute>
+</PubMedPubDate>
+<PubMedPubDate PubStatus="entrez">
+<Year>2005</Year>
+<Month>7</Month>
+<Day>5</Day>
+<Hour>9</Hour>
+<Minute>0</Minute>
+</PubMedPubDate>
+</History>
+<PublicationStatus>ppublish</PublicationStatus>
+<ArticleIdList>
+<ArticleId IdType="pubmed">15996060</ArticleId>
+<ArticleId IdType="pii">0315162X-32-1253</ArticleId>
+</ArticleIdList>
+</PubmedData>
+</PubmedArticle>
+</PubmedArticleSet>
