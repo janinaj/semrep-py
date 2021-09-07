@@ -616,8 +616,8 @@ def setup_nlp_config(nlp_config):
     global spacynlp
     spacynlp = spacy.load(nlp_config['spacy'])
 
-    sbd = SentenceSegmenter(nlp.vocab, strategy=split_on_newlines)
-    nlp.add_pipe(sbd, first = True)
+    # sbd = SentenceSegmenter(nlp.vocab, strategy=split_on_newlines)
+    # nlp.add_pipe(sbd, first = True)
 
     global chunker
     chunker = ServerProxyClient('localhost', 8080)
