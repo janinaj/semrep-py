@@ -3,7 +3,6 @@ import errno
 import os
 import sys
 import re
-# import parse
 
 import configparser
 
@@ -17,25 +16,14 @@ sys.path.append('server')
 from sentence_splitter import *
 from socketclient import *
 from serverproxyclient import *
+from gnormplus import *
+from metamaplite import *
+from wsd import *
 from lexaccess import LexAccess
 from srindicator import *
 from multiprocessing import Pool
 
 import spacy
-
-#don't use
-class Preprocess:
-    def __init__(self, config):
-        # to do: extend scispacy and add this
-        if config['sentence_splitter'] == 'default':
-            self.sentence_splitter = SemrepSentenceSplitter()
-
-        self.spacynlp = spacy.load('en_core_sci_sm')
-
-        # self.tokenizer = config['tokenizer']
-        # self.pos_tagger = config['pos_tagger']
-        # self.lemmatizer = config['lemmatizer']
-        # self.chunker = config['chunker']
 
 class Sentence:
     def __init__(self, config):
@@ -46,113 +34,6 @@ class Sentence:
 class ScoredUMLSConcept:
     def __init__(self):
         pass
-
-class MetamapLite:
-    def __init__(self):
-        pass
-
-    def annotate(self, text):
-        socket_client = SocketClient(HOST, METAMAPLITE_PORT)
-        annotations = socket_client.send(text)
-        # print(annotations)
-        return self.parse_annotations(annotations)
-
-    def parse_annotations(self, annotations):
-        # format: {(start, length) : list<ScoredUMLSConcept>}
-        parsed_annotations = {}
-
-        field_names = ['cui', 'name', 'concept_string', 'score', 'semtypes', 'semgroups']
-
-        # fields that contain a list of strings
-        field_list_objs = ['semtypes', 'semgroups']
-        for annotation in annotations.split(";;"):
-            if annotation.endswith(',,'):
-                annotation = annotation[:-2]
-
-            # if string is empty, skip annotation (should only happen at end of annotations string)
-            if annotation.strip() == '':
-                continue
-
-            field_values = annotation.split(',,')
-
-            # span of entity in annotations string
-            span = (int(field_values[0]), int(field_values[1]))
-
-            # parse all matched concepts
-            concepts = []
-            for index in range(2, len(field_values), len(field_names)):
-                concept = dict(zip(field_names, field_values[index: index + len(field_names) + 1]))
-                for field_name in field_list_objs:
-                    concept[field_name] = concept[field_name].split('::')
-                concepts.append(concept)
-
-            parsed_annotations[span] = concepts
-
-        return parsed_annotations
-
-class GNormPlus:
-    def __init__(self):
-        pass
-
-    def annotate(self, text):
-        socket_client = SocketClient(HOST, GNORMPLUS_PORT)
-        annotations = socket_client.send(text, True)
-        # print(annotations)
-        return self.parse_annotations(annotations)
-
-    def parse_annotations(self, annotations):
-        parsed_annotations = {}
-
-        field_names = ['id', 'name', 'type']
-
-        for annotation in annotations.split("\n"):
-            # if string is empty, skip annotation (should only happen at end of annotations string)
-            if annotation.strip() == '':
-                continue
-
-            field_values = annotation.split('\t')
-            if field_values[3] == 'Gene':
-                span = (int(field_values[0]), int(field_values[1]) - int(field_values[0]))
-                concept = dict(zip(field_names, field_values[2:]))
-
-                parsed_annotations[span] = concept
-
-        return parsed_annotations
-
-class WSD:
-    def __init__(self):
-        pass
-
-    def disambiguate(self, annotations, text):
-        all_queries = ''
-        for (start, end), concepts in annotations.items():
-            query = {}
-
-            query['cuis'] = {}
-            for concept in concepts:
-                query['cuis'][concept['cui']] = concept['name']
-            query['cuis'] = json.dumps(query['cuis']).replace("'", "\\'")
-
-            query['sl'] = f'{start}-{end}'
-            query['text'] = text[:-1]
-
-            all_queries += json.dumps(query) + '\t\t\t'
-
-        socket_client = SocketClient(HOST, WSD_PORT)
-        responses = socket_client.send(all_queries)
-
-        for response in responses.split('\t\t\t'):
-            response = json.loads(response)
-
-            span = response['sl'].split('-')
-            start = int(span[0])
-            end = int(span[1])
-
-            for concept in annotations[(start, end)]:
-                if concept['name'] == response['names']:
-                    annotations[(start, end)] = concept
-                    break
-        return annotations
 
 # test semreprules
 # import xml.etree.ElementTree as ET
@@ -191,55 +72,6 @@ LEFT_PARENTHESES = ['(', '{', '[']
 RIGHT_PARENTHESES = [')', '}', ']']
 APPOSITIVE_INDICATORS = ['such as', 'particularly', 'in particular', 'including']
 
-def process_directory(input_file_format, input_dir_path, output_dir_path = None):
-    """Reads and processes files from a directory
-
-    Args:
-        input_file_format (str): format of the files to process (plaintext, medline, or medlinexml)
-        input_dir_path (str): path to the directory to process
-        output_dir_path (str): path to the output directory (optional)
-    """
-
-    for filename in os.listdir(input_dir_path):
-        if filename != '.DS_Store':
-            process_file(input_file_format, os.path.join(input_dir_path, filename), output_dir_path, False)
-
-def process_file(input_file_format, input_file_path, output_file_path = None, multiple_documents = True):
-    """Reads and processes a single file
-
-    Args:
-        input_file_format (str): format of the files to process (plaintext, medline, or medlinexml)
-        input_file_path (str): path to the file to process
-        output_dir_path (str): path to the output file (optional)
-    """
-    if input_file_format == 'plaintext':
-        docs = read_plaintext_file(input_file_path)
-    elif input_file_format == 'medline':
-        docs = parse_medline_file(input_file_path)
-    elif input_file_format == 'medlinexml':
-        docs = parse_medlinexml_file(input_file_path)
-
-    for doc in docs:
-        # print('PMID: {}'.format(doc.PMID))
-        # print('Title: {}'.format(doc.title))
-        if doc.title is not None:
-            process_text(doc.title)
-        process_text(doc.abstract)
-
-def process_interactive(output_path = None):
-    """Repeatedly processes a single line of input until user enters quit
-
-    Args:
-        output_path (str): path to the output file (optional)
-    """
-    print('Please enter text. Each input will be processed as a single document. Type quit to exit interactive session.')
-    while True:
-        text_input = input()
-        if text_input != 'quit':
-            process_text(text_input)
-        else:
-            exit()
-
 def get_head_index(np_chunk):
     return len(np_chunk) - 1
 
@@ -254,14 +86,15 @@ def referential_analysis(text, ontologies = [GNormPlus, MetamapLite]):
     processes = {}
     with Pool(processes = len(ontologies)) as pool:
         for ontology in ontologies:
-            processes[ontology.__name__] = pool.apply_async(ontology().annotate, args = (text,))
+            processes[ontology.__name__] = pool.apply_async(ontology(servers['host'],
+                                             servers[ontology.__name__.lower() + '_port']).annotate, args = (text,))
 
         annotations = {}
         for ontology in ontologies:
             annotations[ontology.__name__] = processes[ontology.__name__].get()
 
-    #wsd
-    WSD().disambiguate(annotations['MetamapLite'], text)
+    # wsd -> THIS DOES NOT WORK AGAIN -- NEED TO RECHECK
+    # WSD(servers['host'], servers[ontology.__name__.lower() + '_port']).disambiguate(annotations['MetamapLite'], text)
 
     span_lengths = {}
     for ontology in ontologies:
@@ -424,18 +257,18 @@ def has_balanced_parenthesis(intervening_phrase):
 NOMINAL_SUBJECT_CUES = ["by","with","via"]
 NOMINAL_OBJECT_CUES = ['of']
 
-def relational_analysis(sentence):
-    candidates = generate_candidates(sentence)
-    for chunk in chunks:
-        if chunk.is_np:
-            noun_compound_interpretation(sentence, chunk, candidates)
-
-        for surface_element in chunks.surface_elements:
-            if surface_element.is_predicate:
-                if ch.isVP() verbal_interpretation(css, ch, preds, se, allCandidates);
-                if ch.isADJP() adjectival_interpretation(css, ch, preds, se, allCandidates);
-                if ch.isPP() prepositional_interpretation(css, ch, preds, se, allCandidates);
-                if ch.isNP() nominal_interpretation(css, ch, preds, se, allCandidates);
+# def relational_analysis(sentence):
+#     candidates = generate_candidates(sentence)
+#     for chunk in chunks:
+#         if chunk.is_np:
+#             noun_compound_interpretation(sentence, chunk, candidates)
+#
+#         for surface_element in chunks.surface_elements:
+#             if surface_element.is_predicate:
+#                 if ch.isVP() verbal_interpretation(css, ch, preds, se, allCandidates);
+#                 if ch.isADJP() adjectival_interpretation(css, ch, preds, se, allCandidates);
+#                 if ch.isPP() prepositional_interpretation(css, ch, preds, se, allCandidates);
+#                 if ch.isNP() nominal_interpretation(css, ch, preds, se, allCandidates);
 
 
 def generate_candidates(surface_elements):
@@ -457,7 +290,7 @@ def noun_compound_interpretation(sentence, chunk, candidates):
             if not surface_element.is_predicate: # filter the surface elements by predicate
                 continue
 
-            right_candidates = candidates.get(surface_element): # get the candidates for this surface element
+            right_candidates = candidates.get(surface_element) # get the candidates for this surface element
 
             prev_surface_element = get_prev_surface_element()
 
@@ -495,7 +328,7 @@ def noun_compound_interpretation(sentence, chunk, candidates):
 
     for modifier in chunk.get_modifiers():
         for surface_element in modifier:
-            if surface_element.is_adjectival::
+            if surface_element.is_adjectival:
                 continue
             surface_element.filter_by_predicates
             if pred.size == 0:
@@ -511,7 +344,7 @@ def noun_compound_interpretation(sentence, chunk, candidates):
                 break
 
             CandidatePair.generateCandidatePairs(leftCands, rightCands)
-			found = verifyAndGenerate(doc,sent,preds,pairs,IndicatorType.ADJECTIVE)
+            found = verifyAndGenerate(doc,sent,preds,pairs,IndicatorType.ADJECTIVE)
 
 def verbal_interpretation(sentence, chunk, preds):
     passive = False
@@ -628,17 +461,16 @@ def verify_and_generate():
     pass
 
 def process_text(text):
-    """Processes a single text input
+    """Processes a single text document
+
+    Args:
+        text (str): document to process
 
     Returns:
-        output: output
+        output: triples extracted using SemRep
     """
     if text is None:
         return None
-
-    #preprocessor = Preprocess(config)
-    sentence_splitter = SemrepSentenceSplitter()
-    lexaccess = LexAccess(config['LEXACCESS'])
 
     sentences = []
     for sentence_text in sentence_splitter.split(text):
@@ -646,7 +478,10 @@ def process_text(text):
         sentence.spacy = spacynlp(sentence_text)
         sentence.surface_elements = lexaccess.get_matches(sentence.spacy)
         sentence.indicators = annotate_indicators(sentence.spacy, srindicators_list, srindicator_lemmas)
-    print('done')
+
+        concepts = referential_analysis(text)
+        print(concepts)
+    print('DONE')
         #relational_analysis(sentence.surface_elements)
 
     # opennlp = OpenNLP()
@@ -771,14 +606,28 @@ def process_text(text):
         #     print(f'\tHEAD: {head.text}, {head.tag_}, {head.idx}, {head.idx + len(head.text)}')
         # exit()
 
+
 def setup_nlp_config(nlp_config):
+    """Load NLP preprocessing libraries with the specified configurations
+
+    Args:
+        nlp_config (dict or configparser.SectionProxy): configuration settings
+    """
     global spacynlp
     spacynlp = spacy.load(nlp_config['spacy'])
+
+    sbd = SentenceSegmenter(nlp.vocab, strategy=split_on_newlines)
+    nlp.add_pipe(sbd, first = True)
 
     global chunker
     chunker = ServerProxyClient('localhost', 8080)
 
 def setup_semrep_config(semrep_config):
+    """Load SemRep rules and databases
+
+    Args:
+        semrep_config (dict or configparser.SectionProxy): file paths of rules/databases
+    """
     global srindicators_list
     global srindicator_lemmas
     srindicators_list, srindicator_lemmas = parse_semrules_file(semrep_config['semrules'])
@@ -789,6 +638,70 @@ def setup_semrep_config(semrep_config):
         for line in f:
             line = line.strip().split('|')
             ontology_db.append(line)
+
+    global lexaccess
+    lexaccess = LexAccess(config['LEXACCESS'])
+
+    global sentence_splitter
+    sentence_splitter = SemrepSentenceSplitter()
+
+def setup_server_config(server_config):
+    """Load NLP preprocessing libraries with the specified configurations
+
+    Args:
+        nlp_config (dict or configparser.SectionProxy): configuration settings
+    """
+    global servers
+    servers = server_config
+
+def process_directory(input_file_format, input_dir_path, output_dir_path = None):
+    """Reads and processes files from a directory
+
+    Args:
+        input_file_format (str): format of the files to process (plaintext, medline, or medlinexml)
+        input_dir_path (str): path to the directory to process
+        output_dir_path (str): path to the output directory (optional)
+    """
+
+    for filename in os.listdir(input_dir_path):
+        if filename != '.DS_Store':
+            process_file(input_file_format, os.path.join(input_dir_path, filename), output_dir_path, False)
+
+def process_file(input_file_format, input_file_path, output_file_path = None, multiple_documents = True):
+    """Reads and processes a single file
+
+    Args:
+        input_file_format (str): format of the files to process (plaintext, medline, or medlinexml)
+        input_file_path (str): path to the file to process
+        output_dir_path (str): path to the output file (optional)
+    """
+    if input_file_format == 'plaintext':
+        docs = read_plaintext_file(input_file_path)
+    elif input_file_format == 'medline':
+        docs = parse_medline_file(input_file_path)
+    elif input_file_format == 'medlinexml':
+        docs = parse_medlinexml_file(input_file_path)
+
+    for doc in docs:
+        # print('PMID: {}'.format(doc.PMID))
+        # print('Title: {}'.format(doc.title))
+        if doc.title is not None:
+            process_text(doc.title)
+        process_text(doc.abstract)
+
+def process_interactive(output_path = None):
+    """Repeatedly processes a single line of input until user enters quit
+
+    Args:
+        output_path (str): path to the output file (optional)
+    """
+    print('Please enter text. Each input will be processed as a single document. Type quit to exit interactive session.')
+    while True:
+        text_input = input()
+        if text_input != 'quit':
+            process_text(text_input)
+        else:
+            exit()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Extract semantic predictions from sentences.')
@@ -832,6 +745,7 @@ if __name__ == '__main__':
 
     setup_nlp_config(config['NLP'])
     setup_semrep_config(config['SEMREP'])
+    setup_server_config(config['SERVERS'])
 
     if args.input_format == 'dir':
         process_directory(args.input_file_format, args.input_path, args.output_path)
