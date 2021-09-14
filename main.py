@@ -19,6 +19,7 @@ from serverproxyclient import *
 from gnormplus import *
 from metamaplite import *
 from wsd import *
+from opennlpcl import *
 from lexaccess import LexAccess
 from srindicator import *
 from multiprocessing import Pool
@@ -257,18 +258,22 @@ def has_balanced_parenthesis(intervening_phrase):
 NOMINAL_SUBJECT_CUES = ["by","with","via"]
 NOMINAL_OBJECT_CUES = ['of']
 
-# def relational_analysis(sentence):
-#     candidates = generate_candidates(sentence)
-#     for chunk in chunks:
-#         if chunk.is_np:
-#             noun_compound_interpretation(sentence, chunk, candidates)
-#
-#         for surface_element in chunks.surface_elements:
-#             if surface_element.is_predicate:
-#                 if ch.isVP() verbal_interpretation(css, ch, preds, se, allCandidates);
-#                 if ch.isADJP() adjectival_interpretation(css, ch, preds, se, allCandidates);
-#                 if ch.isPP() prepositional_interpretation(css, ch, preds, se, allCandidates);
-#                 if ch.isNP() nominal_interpretation(css, ch, preds, se, allCandidates);
+def relational_analysis(sentence):
+    candidates = generate_candidates(sentence)
+    for chunk in chunks:
+        if chunk.is_np:
+            noun_compound_interpretation(sentence, chunk, candidates)
+
+        for surface_element in chunks.surface_elements:
+            if surface_element.is_predicate:
+                if chunk.isVP():
+                    verbal_interpretation(css, ch, preds, se, allCandidates)
+                if chunk.isADJP():
+                    adjectival_interpretation(css, ch, preds, se, allCandidates)
+                if chunk.isPP():
+                    prepositional_interpretation(css, ch, preds, se, allCandidates)
+                if chunk.isNP():
+                    nominal_interpretation(css, ch, preds, se, allCandidates)
 
 
 def generate_candidates(surface_elements):
@@ -472,6 +477,11 @@ def process_text(text):
     if text is None:
         return None
 
+    doc = spacynlp(text)
+    # print(len(text))
+    # print(len(doc))
+    # exit()
+
     sentences = []
     for sentence_text in sentence_splitter.split(text):
         sentence = Sentence(config)
@@ -481,10 +491,10 @@ def process_text(text):
 
         concepts = referential_analysis(text)
         print(concepts)
-    print('DONE')
+    # print('DONE')
         #relational_analysis(sentence.surface_elements)
 
-    # opennlp = OpenNLP()
+    #
     #
     # concepts = referential_analysis(text)
     #
@@ -621,6 +631,9 @@ def setup_nlp_config(nlp_config):
 
     global chunker
     chunker = ServerProxyClient('localhost', 8080)
+
+    global opennlp
+    opennlp = nlp_config['opennlp']
 
 def setup_semrep_config(semrep_config):
     """Load SemRep rules and databases
