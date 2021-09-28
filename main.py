@@ -502,7 +502,7 @@ def process_text(text):
         sentence.indicators = annotate_indicators(sentence.spacy, srindicators_list, srindicator_lemmas)
 
         concepts = referential_analysis(text)
-#<<<<<<< Updated upstream
+#<<<<<<< Updated upstream ;sort out hypernym_analysis changes next
         # change noun chunks to return list instead of generator
         # for n in sentence.spacy.noun_chunks: print(n)
 #       hypernym_analysis(sentence.spacy, concepts)
