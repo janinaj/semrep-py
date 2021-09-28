@@ -6,9 +6,19 @@ class MetamapLite:
         self.port = port
 
     def annotate(self, text):
+        import json
         socket_client = SocketClient(self.host, self.port)
         annotations = socket_client.send(text)
         # print(annotations)
+        print(f'annotate:{type(annotations)}')
+        annotations.replace(';;',';\n;') #1st step to being more comparable
+        print(f'annotate:{annotations}')
+        with open("an.tmp", 'a') as f:
+            f.write(annotations)
+            f.write('\n')
+            #ad=eval(annotations)
+            #annotations2=json.dumps(ad,indent=2)
+            #f.write(annotations2)
         return self.parse_annotations(annotations)
 
     def parse_annotations(self, annotations):

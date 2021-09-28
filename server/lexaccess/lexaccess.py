@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 from jsonrpclib.SimpleJSONRPCServer import SimpleJSONRPCServer
 import optparse
 import os.path
@@ -24,7 +24,8 @@ class LexAccess():
 
         self.process.sendline(text)
         self.process.readline()
-        self.process.expect(u'</lexRecords>')
+        #self.process.expect(u'</lexRecords>')
+        self.process.expect('</lexRecords>')
         # self.process.expect(u'----------')
         
 
@@ -49,7 +50,8 @@ def main():
     #                   help="Path to OpenNLP install [%s]" % DIRECTORY)
 
 
-    path = '/Users/mjsarol/Documents/BioNLP/lexAccess2016/bin/LexAccess -f:id -f:x'
+    #path = '/Users/mjsarol/Documents/BioNLP/lexAccess2016/bin/LexAccess -f:id -f:x'
+    path = 'lexAccess -f:id -f:x'
     # path = 'java -cp /Users/mjsarol/Documents/BioNLP/lexAccess2016/lib/lexAccess2016api.jar:/Users/mjsarol/Documents/BioNLP/lexAccess2016/lib/Other/lexCheck2016api.jar:/Users/mjsarol/Documents/BioNLP/lexAccess2016/lib/jdbcDrivers/HSqlDb/hsqldb.jar:/Users/mjsarol/Documents/BioNLP/lexicon-wrapper Test'
     options, args = parser.parse_args()
 
