@@ -503,7 +503,6 @@ def process_text(text):
 
         concepts = referential_analysis(text)
 #<<<<<<< Updated upstream
-
         # change noun chunks to return list instead of generator
         # for n in sentence.spacy.noun_chunks: print(n)
 #       hypernym_analysis(sentence.spacy, concepts)
