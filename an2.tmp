@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lexRecords>
+  <lexRecord>
+    <base>in</base>
+    <eui>E0033869</eui>
+    <cat>adv</cat>
+    <inflVars cat="adv" cit="in" eui="E0033869" infl="base" type="basic" unInfl="in">in</inflVars>
+    <inflVars cat="adv" cit="in" eui="E0033869" infl="positive" type="basic" unInfl="in">in</inflVars>
+    <advEntry>
+      <variants>inv</variants>
+      <modification>verb_modifier;locative</modification>
+      <modification>particle</modification>
+    </advEntry>
+  </lexRecord>
+  <lexRecord>
+    <base>in</base>
+    <eui>E0033870</eui>
+    <cat>prep</cat>
+    <inflVars cat="prep" cit="in" eui="E0033870" infl="base" type="basic" unInfl="in">in</inflVars>
+  </lexRecord>
+  <lexRecord>
+    <base>In</base>
+    <eui>E0206594</eui>
+    <cat>noun</cat>
+    <inflVars cat="noun" cit="In" eui="E0206594" infl="base" type="basic" unInfl="In">In</inflVars>
+    <inflVars cat="noun" cit="In" eui="E0206594" infl="singular" type="basic" unInfl="In">In</inflVars>
+    <inflVars cat="noun" cit="In" eui="E0206594" infl="plural" type="metareg" unInfl="In">Ins</inflVars>
+    <inflVars cat="noun" cit="In" eui="E0206594" infl="plural" type="metareg" unInfl="In">In's</inflVars>
+    <nounEntry>
+      <variants>metareg</variants>
+      <variants>uncount</variants>
+    </nounEntry>
+    <abbreviations>indium|E0069804</abbreviations>
+    <abbreviations>index|E0034155</abbreviations>
+    <abbreviations>insulin|E0034884</abbreviations>
+    <abbreviations>inulin|E0035663</abbreviations>
+    <abbreviations>intermediate|E0035110</abbreviations>
+  </lexRecord>
+  <lexRecord>
+    <base>IN</base>
+    <eui>E0555642</eui>
+    <cat>noun</cat>
+    <inflVars cat="noun" cit="IN" eui="E0555642" infl="base" type="basic" unInfl="IN">IN</inflVars>
+    <inflVars cat="noun" cit="IN" eui="E0555642" infl="singular" type="basic" unInfl="IN">IN</inflVars>
+    <inflVars cat="noun" cit="IN" eui="E0555642" infl="plural" type="metareg" unInfl="IN">INs</inflVars>
+    <inflVars cat="noun" cit="IN" eui="E0555642" infl="plural" type="metareg" unInfl="IN">IN's</inflVars>
+    <nounEntry>
+      <variants>metareg</variants>
+      <variants>uncount</variants>
+    </nounEntry>
+    <acronyms>interpositus nucleus|E0475922</acronyms>
+    <acronyms>interneuron|E0070565</acronyms>
+    <acronyms>interneurone|E0321205</acronyms>
+    <acronyms>interstitial nephritis|E0035295</acronyms>
+    <abbreviations>integrase|E0404797</abbreviations>
+    <abbreviations>insulin|E0034884</abbreviations>
+    <abbreviations>indomethacin|E0034223</abbreviations>
+    <abbreviations>Indiana|E0003399</abbreviations>
+    <abbreviations>intermediate|E0035110</abbreviations>
+    <abbreviations>integration|E0034927</abbreviations>
+    <abbreviations>nucleus interpositus|E0555635</abbreviations>
+  </lexRecord>
+  <lexRecord>
+    <base>IN</base>
+    <eui>E0555643</eui>
+    <cat>adj</cat>
+    <inflVars cat="adj" cit="IN" eui="E0555643" infl="base" type="basic" unInfl="IN">IN</inflVars>
+    <inflVars cat="adj" cit="IN" eui="E0555643" infl="positive" type="basic" unInfl="IN">IN</inflVars>
+    <adjEntry>
+      <variants>inv</variants>
+      <position type="pred"/>
+      <position type="attrib(3)"/>
+      <stative/>
+    </adjEntry>
+    <acronyms>intranasal|E0035499</acronyms>
+    <abbreviations>intact|E0034917</abbreviations>
+  </lexRecord>
+  <lexRecord>
+    <base>In</base>
+    <eui>E0555644</eui>
+    <cat>adj</cat>
+    <inflVars cat="adj" cit="In" eui="E0555644" infl="base" type="basic" unInfl="In">In</inflVars>
+    <inflVars cat="adj" cit="In" eui="E0555644" infl="positive" type="basic" unInfl="In">In</inflVars>
+    <adjEntry>
+      <variants>inv</variants>
+      <position type="pred"/>
+      <position type="attrib(3)"/>
+      <stative/>
+    </adjEntry>
+    <abbreviations>intermediate|E0035109</abbreviations>
+  </lexRecord>
+  <lexRecord>
+    <base>IN</base>
+    <eui>E0555646</eui>
+    <cat>adv</cat>
+    <inflVars cat="adv" cit="IN" eui="E0555646" infl="base" type="basic" unInfl="IN">IN</inflVars>
+    <inflVars cat="adv" cit="IN" eui="E0555646" infl="positive" type="basic" unInfl="IN">IN</inflVars>
+    <advEntry>
+      <variants>inv</variants>
+      <modification>verb_modifier;locative</modification>
+    </advEntry>
+    <acronyms>intranasally|E0319257</acronyms>
+  </lexRecord>
+</lexRecords>
+===
+ 
+<?xml version="1.0" encoding="UTF-8"?>
+<lexRecords>
+</lexRecords>
+<?xml version="1.0" encoding="UTF-8"?>
+<lexRecords>
+  <lexRecord>
+    <base>in</base>
+    <eui>E0033869</eui>
+    <cat>adv</cat>
+    <inflVars cat="adv" cit="in" eui="E0033869" infl="base" type="basic" unInfl="in">in</inflVars>
+    <inflVars cat="adv" cit="in" eui="E0033869" infl="positive" type="basic" unInfl="in">in</inflVars>
+    <advEntry>
+      <variants>inv</variants>
+      <modification>verb_modifier;locative</modification>
+      <modification>particle</modification>
+    </advEntry>
+  </lexRecord>
+  <lexRecord>
+    <base>in</base>
+    <eui>E0033870</eui>
+    <cat>prep</cat>
+    <inflVars cat="prep" cit="in" eui="E0033870" infl="base" type="basic" unInfl="in">in</inflVars>
+  </lexRecord>
+  <lexRecord>
+    <base>In</base>
+    <eui>E0206594</eui>
+    <cat>noun</cat>
+    <inflVars cat="noun" cit="In" eui="E0206594" infl="base" type="basic" unInfl="In">In</inflVars>
+    <inflVars cat="noun" cit="In" eui="E0206594" infl="singular" type="basic" unInfl="In">In</inflVars>
+    <inflVars cat="noun" cit="In" eui="E0206594" infl="plural" type="metareg" unInfl="In">Ins</inflVars>
+    <inflVars cat="noun" cit="In" eui="E0206594" infl="plural" type="metareg" unInfl="In">In's</inflVars>
+    <nounEntry>
+      <variants>metareg</variants>
+      <variants>uncount</variants>
+    </nounEntry>
+    <abbreviations>indium|E0069804</abbreviations>
+    <abbreviations>index|E0034155</abbreviations>
+    <abbreviations>insulin|E0034884</abbreviations>
+    <abbreviations>inulin|E0035663</abbreviations>
+    <abbreviations>intermediate|E0035110</abbreviations>
+  </lexRecord>
+  <lexRecord>
+    <base>IN</base>
+    <eui>E0555642</eui>
+    <cat>noun</cat>
+    <inflVars cat="noun" cit="IN" eui="E0555642" infl="base" type="basic" unInfl="IN">IN</inflVars>
+    <inflVars cat="noun" cit="IN" eui="E0555642" infl="singular" type="basic" unInfl="IN">IN</inflVars>
+    <inflVars cat="noun" cit="IN" eui="E0555642" infl="plural" type="metareg" unInfl="IN">INs</inflVars>
+    <inflVars cat="noun" cit="IN" eui="E0555642" infl="plural" type="metareg" unInfl="IN">IN's</inflVars>
+    <nounEntry>
+      <variants>metareg</variants>
+      <variants>uncount</variants>
+    </nounEntry>
+    <acronyms>interpositus nucleus|E0475922</acronyms>
+    <acronyms>interneuron|E0070565</acronyms>
+    <acronyms>interneurone|E0321205</acronyms>
+    <acronyms>interstitial nephritis|E0035295</acronyms>
+    <abbreviations>integrase|E0404797</abbreviations>
+    <abbreviations>insulin|E0034884</abbreviations>
+    <abbreviations>indomethacin|E0034223</abbreviations>
+    <abbreviations>Indiana|E0003399</abbreviations>
+    <abbreviations>intermediate|E0035110</abbreviations>
+    <abbreviations>integration|E0034927</abbreviations>
+    <abbreviations>nucleus interpositus|E0555635</abbreviations>
+  </lexRecord>
+  <lexRecord>
+    <base>IN</base>
+    <eui>E0555643</eui>
+    <cat>adj</cat>
+    <inflVars cat="adj" cit="IN" eui="E0555643" infl="base" type="basic" unInfl="IN">IN</inflVars>
+    <inflVars cat="adj" cit="IN" eui="E0555643" infl="positive" type="basic" unInfl="IN">IN</inflVars>
+    <adjEntry>
+      <variants>inv</variants>
+      <position type="pred"/>
+      <position type="attrib(3)"/>
+      <stative/>
+    </adjEntry>
+    <acronyms>intranasal|E0035499</acronyms>
+    <abbreviations>intact|E0034917</abbreviations>
+  </lexRecord>
+  <lexRecord>
+    <base>In</base>
+    <eui>E0555644</eui>
+    <cat>adj</cat>
+    <inflVars cat="adj" cit="In" eui="E0555644" infl="base" type="basic" unInfl="In">In</inflVars>
+    <inflVars cat="adj" cit="In" eui="E0555644" infl="positive" type="basic" unInfl="In">In</inflVars>
+    <adjEntry>
+      <variants>inv</variants>
+      <position type="pred"/>
+      <position type="attrib(3)"/>
+      <stative/>
+    </adjEntry>
+    <abbreviations>intermediate|E0035109</abbreviations>
+  </lexRecord>
+  <lexRecord>
+    <base>IN</base>
+    <eui>E0555646</eui>
+    <cat>adv</cat>
+    <inflVars cat="adv" cit="IN" eui="E0555646" infl="base" type="basic" unInfl="IN">IN</inflVars>
+    <inflVars cat="adv" cit="IN" eui="E0555646" infl="positive" type="basic" unInfl="IN">IN</inflVars>
+    <advEntry>
+      <variants>inv</variants>
+      <modification>verb_modifier;locative</modification>
+    </advEntry>
+    <acronyms>intranasally|E0319257</acronyms>
+  </lexRecord>
+</lexRecords>

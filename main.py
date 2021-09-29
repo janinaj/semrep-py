@@ -141,6 +141,7 @@ def get_concept(term, concepts):
 
 #hierarchy: first mention (e.g. GNormPlus over MetamapLite)
 def referential_analysis(text, ontologies = [GNormPlus, MetamapLite]):
+    #import json
     processes = {}
     with Pool(processes = len(ontologies)) as pool:
         for ontology in ontologies:
@@ -166,6 +167,7 @@ def referential_analysis(text, ontologies = [GNormPlus, MetamapLite]):
     sorted_span_lengths.sort(reverse = True)
 
     merged_annotations = {}
+    t_annotations = {}
     for span_length in sorted_span_lengths:
         for (start, end), concept in span_lengths[span_length].items():
             cur_span_range = set(range(start, end))
@@ -175,10 +177,16 @@ def referential_analysis(text, ontologies = [GNormPlus, MetamapLite]):
                 merged_span_range = set(range(merged_start, merged_end))
                 if len(cur_span_range.intersection(merged_span_range)) > 0:
                     # print(f'DONT ADD: {(start, end)}')
+                    print(f'DONT ADD: {(start, end)}')
                     merge = False
                     break
             if merge:
                 merged_annotations[(start, end)] = concept
+                t_annotations[f't{start}_{end}'] = concept
+
+    with open("an.tmp", 'a') as f:
+        f.write(json.dumps(t_annotations,indent=2)) #error, have2change
+        f.write('\n')
 
     return merged_annotations
 
@@ -345,6 +353,9 @@ def generate_candidates(surface_elements):
                                    'semtype' : concept.semtype})
     return candidates
 
+#@cache
+import functools
+@functools.lru_cache(maxsize=None)
 def lookup(semtype_1, pred_type, semtype_2):
     return '-'.join([semtype_1, pred_type, semtype_2]) in ontology_db
 
@@ -543,6 +554,7 @@ def process_text(text):
 
     # print(len(text))
     # print(len(doc))
+    print(f'len:text:{len(text)},doc:{len(doc)}')
     # exit()
 
     sentences = []
@@ -553,10 +565,18 @@ def process_text(text):
         sentence.indicators = annotate_indicators(sentence.spacy, srindicators_list, srindicator_lemmas)
 
         concepts = referential_analysis(text)
+#<<<<<<< Updated upstream
 
         # change noun chunks to return list instead of generator
         # for n in sentence.spacy.noun_chunks: print(n)
-        hypernym_analysis(sentence.spacy, concepts)
+#       hypernym_analysis(sentence.spacy, concepts)
+#=======
+        #print(concepts)
+        print(f'concepts:{concepts}')
+        #with open("an.tmp", 'a') as f:
+        #    f.write(concepts) #error, have2change
+        #    f.write('\n')
+#>>>>>>> Stashed changes
     # print('DONE')
         #relational_analysis(sentence.surface_elements)
 
@@ -767,6 +787,7 @@ def process_file(input_file_format, input_file_path, output_file_path = None, mu
     for doc in docs:
         # print('PMID: {}'.format(doc.PMID))
         # print('Title: {}'.format(doc.title))
+        print(f'PMID: {doc.PMID},Title: {doc.title}')
         if doc.title is not None:
             process_text(doc.title)
         process_text(doc.abstract)

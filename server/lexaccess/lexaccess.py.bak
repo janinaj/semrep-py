@@ -1,4 +1,4 @@
-
+from __future__ import print_function
 from jsonrpclib.SimpleJSONRPCServer import SimpleJSONRPCServer
 import optparse
 import os.path

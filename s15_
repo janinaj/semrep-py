@@ -1,0 +1,110 @@
+ed 15 Sep 2021 09:58:08 AM CDT
+λ▶<22 s15i3: /janinaj/semrep-py> python main.py
+python: Command not found.
+λ▶<23 s15i3: /janinaj/semrep-py> python3 main.py
+No configuration file specified. Using default configuration.
+Traceback (most recent call last):
+  File "main.py", line 759, in <module>
+    setup_nlp_config(config['NLP'])
+  File "main.py", line 627, in setup_nlp_config
+    spacynlp = spacy.load(nlp_config['spacy'])
+  File "/home/bobak/.local/lib/python3.8/site-packages/spacy/__init__.py", line 50, in load
+    return util.load_model(
+  File "/home/bobak/.local/lib/python3.8/site-packages/spacy/util.py", line 331, in load_model
+    raise IOError(Errors.E050.format(name=name))
+OSError: [E050] Can't find model 'en_core_sci_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+λ▶<24 s15i3: /janinaj/semrep-py> python3 main.py --config_file=default.config
+Traceback (most recent call last):
+  File "main.py", line 759, in <module>
+    setup_nlp_config(config['NLP'])
+  File "main.py", line 627, in setup_nlp_config
+    spacynlp = spacy.load(nlp_config['spacy'])
+  File "/home/bobak/.local/lib/python3.8/site-packages/spacy/__init__.py", line 50, in load
+    return util.load_model(
+  File "/home/bobak/.local/lib/python3.8/site-packages/spacy/util.py", line 331, in load_model
+    raise IOError(Errors.E050.format(name=name))
+OSError: [E050] Can't find model 'en_core_sci_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+λ▶<25 s15i3: /janinaj/semrep-py> gvc2 opennlp
+setenv OPENNLP /media/bobak/h4/dwn/ai/nl/p/open/apache-opennlp-1.9.3
+λ▶<26 s15i3: /janinaj/semrep-py> echo $OPENNLP
+/media/bobak/h4/dwn/ai/nl/p/open/apache-opennlp-1.9.3
+λ▶<27 s15i3: /janinaj/semrep-py> ls $OPENNLP
+bin/  docs/  issuesFixed/  lang/  lib/  LICENSE  models@  NOTICE  README.html
+λ▶<28 s15i3: /janinaj/semrep-py> 
+ 
+λ▶<40 s15i3: /janinaj/semrep-py> !24
+python3 main.py --config_file=default.config
+Traceback (most recent call last):
+  File "main.py", line 759, in <module>
+    setup_nlp_config(config['NLP'])
+  File "main.py", line 627, in setup_nlp_config
+    spacynlp = spacy.load(nlp_config['spacy'])
+  File "/home/bobak/.local/lib/python3.8/site-packages/spacy/__init__.py", line 50, in load
+    return util.load_model(
+  File "/home/bobak/.local/lib/python3.8/site-packages/spacy/util.py", line 331, in load_model
+    raise IOError(Errors.E050.format(name=name))
+OSError: [E050] Can't find model 'en_core_sci_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+λ▶<41 s15i3: /janinaj/semrep-py> h1
+    32  10:00   ls models/
+    33  10:00   loc en_core_sci_sm
+    34  10:02   python3 -m scispacy download en_core_sci_sm
+    35  10:02   pi3 scispacy
+    36  10:05   loc en_core_sci_sm
+    37  10:05   sdsrp
+    38  10:05   cdsrp
+    39  10:05   gh main
+    40  10:05   python3 main.py --config_file=default.config
+    41  10:05   h1
+λ▶<42 s15i3: /janinaj/semrep-py> echo and untar in open/models
+ 
+▶<48 s15i3: /janinaj/semrep-py> python3 main.py --config_file=default.config
+[Errno 111] Connection refused
+Traceback (most recent call last):
+  File "/var/www/html/n/ff/is/src/janinaj/semrep-py/lexaccess.py", line 85, in lookup
+    match = self.server.parse(text)
+  File "/home/bobak/.local/lib/python3.8/site-packages/jsonrpclib/jsonrpc.py", line 263, in __call__
+    return self.__send(self.__name, args)
+  File "/home/bobak/.local/lib/python3.8/site-packages/jsonrpclib/jsonrpc.py", line 212, in _request
+    response = self._run_request(request)
+  File "/home/bobak/.local/lib/python3.8/site-packages/jsonrpclib/jsonrpc.py", line 226, in _run_request
+    response = self.__transport.request(
+  File "/usr/lib/python3.8/xmlrpc/client.py", line 1153, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "/usr/lib/python3.8/xmlrpc/client.py", line 1165, in single_request
+    http_conn = self.send_request(host, handler, request_body, verbose)
+  File "/usr/lib/python3.8/xmlrpc/client.py", line 1278, in send_request
+    self.send_content(connection, request_body)
+  File "/home/bobak/.local/lib/python3.8/site-packages/jsonrpclib/jsonrpc.py", line 109, in send_content
+    connection.endheaders()
+  File "/usr/lib/python3.8/http/client.py", line 1247, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1007, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 947, in send
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 918, in connect
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main.py", line 764, in <module>
+    process_directory(args.input_file_format, args.input_path, args.output_path)
+  File "main.py", line 681, in process_directory
+    process_file(input_file_format, os.path.join(input_dir_path, filename), output_dir_path, False)
+  File "main.py", line 703, in process_file
+    process_text(doc.abstract)
+  File "main.py", line 489, in process_text
+    sentence.surface_elements = lexaccess.get_matches(sentence.spacy)
+  File "/var/www/html/n/ff/is/src/janinaj/semrep-py/lexaccess.py", line 121, in get_matches
+    lexrecords_xml = self.lookup(lookup_text)
+  File "/var/www/html/n/ff/is/src/janinaj/semrep-py/lexaccess.py", line 94, in lookup
+    print('LexAccess error: ' + e)
+TypeError: can only concatenate str (not "ConnectionRefusedError") to str
+λ▶<49 s15i3: /janinaj/semrep-py> 
+ 

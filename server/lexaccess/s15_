@@ -1,0 +1,80 @@
+λ▶<72 s15i3: /server/lexaccess> pi lexaccess
+Starting LexAccess
+ 
+λ▶<75 s15i3: /server/lexaccess> gitdiff
+diff --git a/server/lexaccess/lexaccess.py b/server/lexaccess/lexaccess.py
+index bc243e7..7cd1be5 100755
+--- a/server/lexaccess/lexaccess.py
++++ b/server/lexaccess/lexaccess.py
+@@ -49,7 +49,8 @@ def main():
+     #                   help="Path to OpenNLP install [%s]" % DIRECTORY)
+ 
+ 
+-    path = '/Users/mjsarol/Documents/BioNLP/lexAccess2016/bin/LexAccess -f:id -f:x'
++    #path = '/Users/mjsarol/Documents/BioNLP/lexAccess2016/bin/LexAccess -f:id -f:x'
++    path = 'lexAccess -f:id -f:x'
+     # path = 'java -cp /Users/mjsarol/Documents/BioNLP/lexAccess2016/lib/lexAccess2016api.jar:/Users/mjsarol/Documents/BioNLP/lexAccess2016/lib/Other/lexCheck2016api.jar:/Users/mjsarol/Documents/BioNLP/lexAccess2016/lib/jdbcDrivers/HSqlDb/hsqldb.jar:/Users/mjsarol/Documents/BioNLP/lexicon-wrapper Test'
+     options, args = parser.parse_args()
+ 
+λ▶<76 s15i3: /server/lexaccess>  
+
+
+If I start it up now, then main doesn't fail, but it times out:
+▶<58 s15i3: /server/lexaccess> pi lexaccess
+Starting LexAccess
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/pexpect/expect.py", line 111, in expect_loop
+    incoming = spawn.read_nonblocking(spawn.maxread, timeout)
+  File "/usr/lib/python3/dist-packages/pexpect/pty_spawn.py", line 482, in read_nonblocking
+    raise TIMEOUT('Timeout exceeded.')
+pexpect.exceptions.TIMEOUT: Timeout exceeded.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "lexaccess.py", line 70, in <module>
+    main()
+  File "lexaccess.py", line 63, in main
+    nlp = LexAccess(path)
+  File "lexaccess.py", line 12, in __init__
+    self.process.readline()
+  File "/usr/lib/python3/dist-packages/pexpect/spawnbase.py", line 474, in readline
+    index = self.expect([self.crlf, self.delimiter])
+  File "/usr/lib/python3/dist-packages/pexpect/spawnbase.py", line 340, in expect
+    return self.expect_list(compiled_pattern_list,
+  File "/usr/lib/python3/dist-packages/pexpect/spawnbase.py", line 369, in expect_list
+    return exp.expect_loop(timeout)
+  File "/usr/lib/python3/dist-packages/pexpect/expect.py", line 119, in expect_loop
+    return self.timeout(e)
+  File "/usr/lib/python3/dist-packages/pexpect/expect.py", line 82, in timeout
+    raise TIMEOUT(msg)
+pexpect.exceptions.TIMEOUT: Timeout exceeded.
+<pexpect.pty_spawn.spawn object at 0x7f9423e19f70>
+command: /home/bobak/h4/umls/umls/lexAccess2010/bin/lexAccess
+args: [b'/home/bobak/h4/umls/umls/lexAccess2010/bin/lexAccess', b'-f:id', b'-f:x']
+buffer (last 100 chars): ''
+
+after: <class 'pexpect.exceptions.TIMEOUT'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: False
+pid: 724078
+child_fd: 6
+closed: False
+timeout: 30
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: None
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile('\r\n')
+    1: EOF
+>>> 
+ 
