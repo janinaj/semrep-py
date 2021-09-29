@@ -26,12 +26,6 @@ from multiprocessing import Pool
 
 import spacy
 
-from spacy.language import Language
-
-# class SRDocument(spacy.tokens.Doc):
-#     def __init__(self):
-#         np_chunks = []
-
 class Sentence:
     def __init__(self, config):
         self.spacy = None
@@ -41,57 +35,6 @@ class Sentence:
 class ScoredUMLSConcept:
     def __init__(self):
         pass
-
-def get_chunks_using_opennlp(doc):
-    opennlp_input = ''
-    for token in doc:
-        opennlp_input += f'{token.text}_{token.tag_} '
-    chunks = opennlp.parse(opennlp_input)
-
-    np_label = doc.vocab.strings.add("NP")
-
-    # print(type(doc.noun_chunks))
-    # doc.noun_chunks = []
-    cur_token_index = 0
-    for chunk in re.findall(r'(?=(\[.*?\]))|(?=(\].*?\[))', chunks):
-        if len(chunk[0]) > 0:
-            chunk = chunk[0].strip()[1:-1].split()
-
-            if chunk[0] == 'NP':
-                # doc.noun_chunks.append(doc[cur_token_index:cur_token_index + len(chunk) - 1])
-                yield cur_token_index, cur_token_index + len(chunk) - 1, np_label
-                #doc[cur_token_index:cur_token_index + len(chunk) - 1]
-
-            cur_token_index += len(chunk) - 1
-        else:
-            chunk = chunk[1][1:-1].strip()
-            if len(chunk) > 0:
-                cur_token_index += len(chunk.split())
-
-# @Language.component("chunker_component")
-# def chunker_component(doc):
-#     opennlp_input = ''
-#     for token in doc:
-#         opennlp_input += f'{token.text}_{token.tag_} '
-#     chunks = opennlp.parse(opennlp_input)
-#
-#     print(type(doc.noun_chunks))
-#     doc.noun_chunks = []
-#     cur_token_index = 0
-#     for chunk in re.findall(r'(?=(\[.*?\]))|(?=(\].*?\[))', chunks):
-#         if len(chunk[0]) > 0:
-#             chunk = chunk[0].strip()[1:-1].split()
-#
-#             if chunk[0] == 'NP':
-#                 doc.noun_chunks.append(doc[cur_token_index:cur_token_index + len(chunk) - 1])
-#
-#             cur_token_index += len(chunk) - 1
-#         else:
-#             chunk = chunk[1][1:-1].strip()
-#             if len(chunk) > 0:
-#                 cur_token_index += len(chunk.split())
-#
-#     return doc
 
 # test semreprules
 # import xml.etree.ElementTree as ET
@@ -135,7 +78,7 @@ def get_head_index(np_chunk):
 
 def get_concept(term, concepts):
     if (term.idx, term.idx + len(term)) in concepts:
-        return concepts[(term.idx, term.idx + len(term))][0]
+        return concepts[(term.idx, term.idx + len(term))]
     else:
         return None
 
@@ -190,11 +133,10 @@ def referential_analysis(text, ontologies = [GNormPlus, MetamapLite]):
 
     return merged_annotations
 
-def hypernym_analysis(spacy_sent, concepts):
-    for np_chunk in spacy_sent.noun_chunks:
+def hypernym_analysis(spacy_sent, np_chunks, concepts):
+    for np_chunk in np_chunks:
         intraNP_hypernymy(np_chunk, concepts)
-    #skip for now, need to fix and work with iterator
-    # interNP_hypernymy(spacy_sent, concepts)
+    interNP_hypernymy(spacy_sent, np_chunks, concepts)
 
 def intraNP_hypernymy(np_chunk, concepts):
     if len(np_chunk) == 1:
@@ -230,7 +172,7 @@ def intraNP_hypernymy(np_chunk, concepts):
         # check for possible hypernymy
         return hypernymy(head_concept, modifier_concept)
 
-def interNP_hypernymy(spacy_sent, concepts, max_distance = 5):
+def interNP_hypernymy(spacy_sent, np_chunks, concepts, max_distance = 5):
     for i in range(len(np_chunks)):
         for j in range(i + 1, i + 6):
             if j == len(np_chunks):
@@ -284,8 +226,7 @@ def hypernymy(concept_1, concept_2, both_directions = True):
     if len(sem_groups - set(['anat', 'conc'])) == 0:
         return None
 
-    socket_client = SocketClient(servers['host'], servers['hierarchy_port'])
-
+    socket_client = SocketClient(HOST, HIERARCHY_PORT)
     if socket_client.send(concept_1['cui'] + concept_2['cui'], True) == 'true':
         print(f"{concept_1['concept_string']} is a {concept_2['concept_string']}")
     elif both_directions and socket_client.send(concept_2['cui'] + concept_1['cui'], True) == 'true':
@@ -547,11 +488,7 @@ def process_text(text):
     if text is None:
         return None
 
-    # print(spacynlp.pipe_names)
     doc = spacynlp(text)
-
-      # ['tagger', 'parser', 'ner', 'print_info']
-
     # print(len(text))
     # print(len(doc))
     print(f'len:text:{len(text)},doc:{len(doc)}')
@@ -565,7 +502,8 @@ def process_text(text):
         sentence.indicators = annotate_indicators(sentence.spacy, srindicators_list, srindicator_lemmas)
 
         concepts = referential_analysis(text)
-#<<<<<<< Updated upstream ;sort out hypernym_analysis changes next
+#<<<<<<< Updated upstream
+
         # change noun chunks to return list instead of generator
         # for n in sentence.spacy.noun_chunks: print(n)
 #       hypernym_analysis(sentence.spacy, concepts)
@@ -710,16 +648,14 @@ def setup_nlp_config(nlp_config):
     global spacynlp
     spacynlp = spacy.load(nlp_config['spacy'])
 
-    spacynlp.vocab.get_noun_chunks = get_chunks_using_opennlp
-    #spacynlp.add_pipe("chunker_component", name="chunker", last=True)
-
     # sbd = SentenceSegmenter(nlp.vocab, strategy=split_on_newlines)
     # nlp.add_pipe(sbd, first = True)
 
+    global chunker
+    chunker = ServerProxyClient('localhost', 8080)
+
     global opennlp
-    opennlp = OpenNLP(nlp_config['opennlp'])
-
-
+    opennlp = nlp_config['opennlp']
 
 def setup_semrep_config(semrep_config):
     """Load SemRep rules and databases
@@ -741,7 +677,6 @@ def setup_semrep_config(semrep_config):
     global lexaccess
     lexaccess = LexAccess(config['LEXACCESS'])
 
-    # change thisZ
     global sentence_splitter
     sentence_splitter = SemrepSentenceSplitter()
 

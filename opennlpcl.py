@@ -1,5 +1,4 @@
 import pexpect
-import os
 
 class OpenNLP():
     def __init__(self, path, tool = 'ChunkerME', model = 'models/en-chunker.bin'):
@@ -41,4 +40,4 @@ class OpenNLP():
             except:
                 pass
             return False
-        return str(results)
+        return results

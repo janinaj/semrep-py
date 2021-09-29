@@ -72,3 +72,77 @@
     }
   ]
 }
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
