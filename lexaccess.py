@@ -1,4 +1,4 @@
-from jsonrpclib.jsonrpc import ServerProxy
+#from jsonrpclib.jsonrpc import ServerProxy
 import xml.etree.ElementTree as ET
 
 POS_MAPPINGS = {
@@ -74,24 +74,41 @@ class LexRecord:
         #self.infl_vars = record_xml.find('inflVars')
         #self.noun_entry = record_xml.find('nounEntry')
 
+def lexA(s): #could make a parse method in class below
+    import os
+    cs=f'echo {s} | lexAccess -f:id -f:x'
+    s=os.popen(cs).read()
+    return s
+
+import functools
+
 class LexAccess():
     def __init__(self, config):
         host = config['host']
         port = int(config['port'])
-        self.server = ServerProxy("http://%s:%d" % (host, port))
+        #self.server = ServerProxy("http://%s:%d" % (host, port))
 
+    @functools.lru_cache(maxsize=None)
     def lookup(self, text):
-        try:
-            match = self.server.parse(text)
-            tree = ET.ElementTree(ET.fromstring(match.strip()))
-            root = tree.getroot()
+        import re
+        #print(f'lookup:{text}')
+        #ctext=text.replace('(','').replace(')','').replace('>','').replace('<','')
+        ctext= re.sub(r'\W+', ' ', text)
+        ctext= ctext.strip()
+        print(f'lookup:{text}:[{ctext}]')
+        if len(ctext)>0:
+            try:
+                #match = self.server.parse(text)
+                match = lexA(ctext)
+                tree = ET.ElementTree(ET.fromstring(match.strip()))
+                root = tree.getroot()
 
-            lexrecords_xml = root.findall('lexRecord')
-            if len(lexrecords_xml) > 0:
-                return lexrecords_xml
-        except Exception as e:
-            print(e)
-            print('LexAccess error: ' + e)
+                lexrecords_xml = root.findall('lexRecord')
+                if len(lexrecords_xml) > 0:
+                    return lexrecords_xml
+            except Exception as e:
+                print(e)
+                print('LexAccess error: ' + e)
         return None
 
     # convert lex records xml to list of lex records object
