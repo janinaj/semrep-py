@@ -127,7 +127,7 @@ def referential_analysis(text, ontologies = [GNormPlus, MetamapLite]):
                 merged_annotations[(start, end)] = concept
                 t_annotations[f't{start}_{end}'] = concept
 
-    with open("an.tmp", 'a') as f:
+    with open("log.tmp", 'a') as f:
         f.write(json.dumps(t_annotations,indent=2)) #error, have2change
         f.write('\n')
 

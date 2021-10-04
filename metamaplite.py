@@ -13,7 +13,7 @@ class MetamapLite:
         print(f'annotate:{type(annotations)}')
         annotations.replace(';;',';\n;') #1st step to being more comparable
         print(f'annotate:{annotations}')
-        with open("an.tmp", 'a') as f:
+        with open("log.tmp", 'a') as f:
             f.write(annotations)
             f.write('\n')
             #ad=eval(annotations)
