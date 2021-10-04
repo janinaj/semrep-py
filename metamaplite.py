@@ -1,4 +1,6 @@
 from socketclient import SocketClient
+import logging
+logging.basicConfig(filename='semrep.log',filemode='a', level=logging.INFO)
 
 class MetamapLite:
     def __init__(self, host, port):
@@ -13,9 +15,11 @@ class MetamapLite:
         print(f'annotate:{type(annotations)}')
         annotations.replace(';;',';\n;') #1st step to being more comparable
         print(f'annotate:{annotations}')
-        with open("log.tmp", 'a') as f:
-            f.write(annotations)
-            f.write('\n')
+        #logging.debug(f'annotations:{annotations}')
+        logging.info(f'annotations:\n{annotations}')
+        #with open("log.tmp", 'a') as f:
+        #    f.write(annotations)
+        #    f.write('\n')
             #ad=eval(annotations)
             #annotations2=json.dumps(ad,indent=2)
             #f.write(annotations2)
