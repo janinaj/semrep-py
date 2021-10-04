@@ -15,14 +15,11 @@ class MetamapLite:
         print(f'annotate:{type(annotations)}')
         annotations.replace(';;',';\n;') #1st step to being more comparable
         print(f'annotate:{annotations}')
-        #logging.debug(f'annotations:{annotations}')
-        logging.info(f'annotations:\n{annotations}')
+        #logging.debug(f'annotations:\n{annotations}')
+        logging.info(f'annotations:{annotations}')
         #with open("log.tmp", 'a') as f:
         #    f.write(annotations)
         #    f.write('\n')
-            #ad=eval(annotations)
-            #annotations2=json.dumps(ad,indent=2)
-            #f.write(annotations2)
         return self.parse_annotations(annotations)
 
     def parse_annotations(self, annotations):

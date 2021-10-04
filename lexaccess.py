@@ -1,5 +1,7 @@
 #from jsonrpclib.jsonrpc import ServerProxy
 import xml.etree.ElementTree as ET
+import logging
+logging.basicConfig(filename='semrep.log',filemode='a', level=logging.INFO)
 
 POS_MAPPINGS = {
     'CC' : ['conj'],
@@ -105,6 +107,7 @@ class LexAccess():
 
                 lexrecords_xml = root.findall('lexRecord')
                 if len(lexrecords_xml) > 0:
+                    logging.info(f'lexrecords_xml:{lexrecords_xml}')
                     return lexrecords_xml
             except Exception as e:
                 print(e)
@@ -123,6 +126,7 @@ class LexAccess():
                 continue
 
             lexrecords.append(lexrecord)
+            logging.info(f'lexrecord:{lexrecord}')
         return lexrecords
 
     def get_matches(self, spacy_sentence):
@@ -153,11 +157,14 @@ class LexAccess():
                 lexrecords = self.parse_lexrecords(prev_lexrecords, text, allowed_pos)
 
                 matches.append((text, lexrecords))
+                logging.info(f'matches:{text},{lexrecords}')
                 prev_lexrecords = None
 
             elif lookup_text != token.text:
                 prev_lexrecords = self.lookup(token.text)
 
             prev_token_index = token.i
+
+            #logging.info(f'matches:\n{matches}')
 
         return matches

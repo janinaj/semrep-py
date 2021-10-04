@@ -27,7 +27,6 @@ import spacy
 import logging
 #logger=logging.getLogger("semrep-py")
 #logging.basicConfig(filename='semrep.log', encoding='utf-8', level=logging.DEBUG)
-#logging.basicConfig(filename='semrep.log')
 logging.basicConfig(filename='semrep.log',filemode='a', level=logging.INFO)
 
 class Sentence:
@@ -135,8 +134,8 @@ def referential_analysis(text, ontologies = [GNormPlus, MetamapLite]):
     #    f.write(json.dumps(t_annotations,indent=2)) #error, have2change
     #    f.write('\n')
 
-    logging.info("\n" + json.dumps(t_annotations,indent=2))
     #logger.debug(json.dumps(t_annotations,indent=2))
+    logging.info("\n" + json.dumps(t_annotations,indent=2))
 
     return merged_annotations
 
