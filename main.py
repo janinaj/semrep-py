@@ -27,7 +27,7 @@ import spacy
 import logging
 #logger=logging.getLogger("semrep-py")
 #logging.basicConfig(filename='semrep.log', encoding='utf-8', level=logging.DEBUG)
-logging.basicConfig(filename='semrep.log',filemode='a', level=logging.INFO)
+logging.basicConfig(filename='semrep.log',filemode='a', level=logging.INFO, format='%(asctime)s %(message)s')
 
 class Sentence:
     def __init__(self, config):
@@ -512,7 +512,10 @@ def process_text(text):
 
         # change noun chunks to return list instead of generator
         # for n in sentence.spacy.noun_chunks: print(n)
-#       hypernym_analysis(sentence.spacy, concepts)
+        logging.info(f'sentence.spacy:{sentence.spacy}')
+#        hypernym_analysis(sentence.spacy, concepts)
+            #hypernym_analysis(sentence.spacy, concepts)
+            #TypeError: hypernym_analysis() missing 1 required positional argument: 'concepts'
 
         #print(concepts)
         print(f'concepts:{concepts}')
@@ -520,7 +523,11 @@ def process_text(text):
         #    f.write(concepts) #error, have2change
         #    f.write('\n')
     # print('DONE')
+        logging.info(f'sentence.surface_elements:{sentence.surface_elements}')
         #relational_analysis(sentence.surface_elements)
+            #File "main.py", line 296, in generate_candidates
+            #if surface_elements.is_entity:
+            #AttributeError: 'tuple' object has no attribute 'is_entity'
 
     #
     #
@@ -746,6 +753,7 @@ def process_interactive(output_path = None):
             exit()
 
 if __name__ == '__main__':
+    logging.info("\n=start a run")
     parser = argparse.ArgumentParser(description='Extract semantic predictions from sentences.')
     parser.add_argument('--config_file', type=str, help='File containing configurations (see default.config for default configuration)')
     parser.add_argument('--input_format', type=str, choices=['dir', 'file', 'interactive'],
