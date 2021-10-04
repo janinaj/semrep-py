@@ -1,0 +1,5 @@
+process_of
+inverse:uses
+location_of
+inverse:part_of
+inverse:process_of

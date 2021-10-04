@@ -1,5 +1,6 @@
-#from jsonrpclib.jsonrpc import ServerProxy
 import xml.etree.ElementTree as ET
+import re
+import subprocess
 
 POS_MAPPINGS = {
     'CC' : ['conj'],
@@ -74,42 +75,47 @@ class LexRecord:
         #self.infl_vars = record_xml.find('inflVars')
         #self.noun_entry = record_xml.find('nounEntry')
 
-def lexA(s): #could make a parse method in class below
-    import os
-    cs=f'echo {s} | lexAccess -f:id -f:x'
-    s=os.popen(cs).read()
-    return s
 
 import functools
 
 class LexAccess():
-    def __init__(self, config):
-        host = config['host']
-        port = int(config['port'])
-        #self.server = ServerProxy("http://%s:%d" % (host, port))
+    def __init__(self, path):
+        self.path = path
 
-    @functools.lru_cache(maxsize=None)
-    def lookup(self, text):
-        import re
-        #print(f'lookup:{text}')
-        #ctext=text.replace('(','').replace(')','').replace('>','').replace('<','')
-        ctext= re.sub(r'\W+', ' ', text)
-        ctext= ctext.strip()
+    def normalize_text(self, text):
+        # print(f'lookup:{text}')
+        # ctext=text.replace('(','').replace(')','').replace('>','').replace('<','')
+        return re.sub(r'\W+', ' ', text)
+
+    #@functools.lru_cache(maxsize = None)
+    def get_matches(self, text):
+        ctext= self.normalize_text(text).strip()
         print(f'lookup:{text}:[{ctext}]')
-        if len(ctext)>0:
+
+        if len(ctext) > 0:
             try:
-                #match = self.server.parse(text)
-                match = lexA(ctext)
+                match = self.lookup(ctext)
                 tree = ET.ElementTree(ET.fromstring(match.strip()))
                 root = tree.getroot()
 
                 lexrecords_xml = root.findall('lexRecord')
                 if len(lexrecords_xml) > 0:
+                    print(f'matched: {text}')
                     return lexrecords_xml
             except Exception as e:
                 print(e)
-                print('LexAccess error: ' + e)
+                print(f'LexAccess error: {e}')
         return None
+
+    def lookup(self, text):  # could make a parse method in class below
+        #command = f'echo {text} | {self.path} -f:id -f:x'
+        # match = os.popen(command).read()
+        echo_cmd = subprocess.Popen(('echo', text), stdout = subprocess.PIPE)
+        output = subprocess.check_output((self.path, '-f:id -f:x'), stdin = echo_cmd.stdout,
+                                         stderr = subprocess.DEVNULL)
+        echo_cmd.wait()
+
+        return output
 
     # convert lex records xml to list of lex records object
     # perform text and pos filtering in this step too
@@ -125,39 +131,4 @@ class LexAccess():
             lexrecords.append(lexrecord)
         return lexrecords
 
-    def get_matches(self, spacy_sentence):
-        matches = []
 
-        prev_token_index = 0
-        prev_lex_record = None
-
-        # find a match for each token, either by itself or as part of a phrase
-        for token in spacy_sentence:
-            lookup_text = spacy_sentence[prev_token_index:token.i + 1].text
-
-            lexrecords_xml = self.lookup(lookup_text)
-
-            # if we find a record, try and match a longer string
-            if lexrecords_xml is not None:
-                prev_lexrecords = lexrecords_xml
-                continue
-
-            # if not, save the current record (if any)
-            if prev_lexrecords is not None:
-                text = spacy_sentence[prev_token_index:token.i]
-                if len(text) == 1:
-                    allowed_pos = spacy_sentence[prev_token_index].tag_
-                else:
-                    allowed_pos = None
-
-                lexrecords = self.parse_lexrecords(prev_lexrecords, text, allowed_pos)
-
-                matches.append((text, lexrecords))
-                prev_lexrecords = None
-
-            elif lookup_text != token.text:
-                prev_lexrecords = self.lookup(token.text)
-
-            prev_token_index = token.i
-
-        return matches

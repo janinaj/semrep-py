@@ -1,3 +1,4 @@
+import os
 import pexpect
 
 class OpenNLP():
@@ -40,4 +41,4 @@ class OpenNLP():
             except:
                 pass
             return False
-        return results
+        return str(results)

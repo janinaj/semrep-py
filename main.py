@@ -16,58 +16,12 @@ sys.path.append('server')
 from sentence_splitter import *
 from socketclient import *
 from serverproxyclient import *
-from gnormplus import *
-from metamaplite import *
-from wsd import *
-from opennlpcl import *
-from lexaccess import LexAccess
 from srindicator import *
-from multiprocessing import Pool
+from spacy_components import *
 
 import spacy
 
-class Sentence:
-    def __init__(self, config):
-        self.spacy = None
-        self.surface_elements = []
-        self.chunks = []
-
-class ScoredUMLSConcept:
-    def __init__(self):
-        pass
-
-# test semreprules
-# import xml.etree.ElementTree as ET
-# tree = ET.parse('resources/semrules2020.xml')
-# root = tree.getroot()
-
-# total_found = 0
-# total_not_found = 0
-# for i, srindicator in enumerate(root.findall('SRIndicator')):
-#     if isinstance(sr_indicators[i].lexeme, list):
-#         continue
-#     for example in srindicator.findall('Example'):
-#         sentence = example.attrib['sentence']
-#         sent = spacynlp(sentence)
-#
-#         found = False
-#         for token in sent:
-#             if token.lemma_.lower() == sr_indicators[i].lexeme['lemma']:
-#                 found = True
-#                 break
-#
-#         if not found:
-#             break
-#     if found:
-#         total_found += 1
-#     else:
-#         total_not_found += 1
-#             # for token in sent:
-#             #     print(token.lemma_)
-#             # print(lemma)
-#             # input(sent)
-# print(total_found)
-# print(total_not_found)
+# create a SemRep class
 
 LEFT_PARENTHESES = ['(', '{', '[']
 RIGHT_PARENTHESES = [')', '}', ']']
@@ -489,19 +443,20 @@ def process_text(text):
         return None
 
     doc = spacynlp(text)
-    # print(len(text))
-    # print(len(doc))
+    for lm in doc._.concepts:
+        print(lm.span)
+        print(lm.annotation)
     print(f'len:text:{len(text)},doc:{len(doc)}')
-    # exit()
 
     sentences = []
-    for sentence_text in sentence_splitter.split(text):
-        sentence = Sentence(config)
-        sentence.spacy = spacynlp(sentence_text)
-        sentence.surface_elements = lexaccess.get_matches(sentence.spacy)
-        sentence.indicators = annotate_indicators(sentence.spacy, srindicators_list, srindicator_lemmas)
-
-        concepts = referential_analysis(text)
+    # for sentence in doc.sents:
+    #     print(f'Processing sentence: {sentence}')
+        # sentence = Sentence(config)
+        # sentence.spacy = spacynlp(sentence_text)
+        # sentence.surface_elements = lexaccess.get_matches(sentence.spacy)
+        # sentence.indicators = annotate_indicators(sentence.spacy, srindicators_list, srindicator_lemmas)
+        #
+        # concepts = referential_analysis(text)
 #<<<<<<< Updated upstream
 
         # change noun chunks to return list instead of generator
@@ -509,134 +464,12 @@ def process_text(text):
 #       hypernym_analysis(sentence.spacy, concepts)
 
         #print(concepts)
-        print(f'concepts:{concepts}')
+        # print(f'concepts:{concepts}')
         #with open("an.tmp", 'a') as f:
         #    f.write(concepts) #error, have2change
         #    f.write('\n')
     # print('DONE')
         #relational_analysis(sentence.surface_elements)
-
-    #
-    #
-    # concepts = referential_analysis(text)
-    #
-    # for sentence in semrep_sent_splitter.split(text):
-    #     np_chunks = []
-    #     pp_chunks = []
-    #
-    #     spacy_sent = spacynlp(sentence)
-    #     opennlp_input = ''
-    #     for token in spacy_sent:
-    #         opennlp_input += f'{token.text}_{token.tag_} '
-    #     chunks = opennlp.parse(opennlp_input)
-    #
-    #     cur_token_index = 0
-    #     for chunk in re.findall(r'(?=(\[.*?\]))|(?=(\].*?\[))', chunks):
-    #         if len(chunk[0]) > 0:
-    #             chunk = chunk[0].strip()[1:-1].split()
-    #
-    #             if chunk[0] == 'NP':
-    #                 np_chunks.append(spacy_sent[cur_token_index:cur_token_index + len(chunk) - 1])
-    #
-    #             cur_token_index += len(chunk) - 1
-    #         else:
-    #             chunk = chunk[1][1:-1].strip()
-    #             if len(chunk) > 0:
-    #                 cur_token_index += len(chunk.split())
-    #
-    #     hypernym_analysis(spacy_sent, np_chunks, concepts)
-        # if len(spacy_sent) -1 != cur_token_index:
-        #     print(len(spacy_sent))
-        #     print(cur_token_index)
-        #     print(opennlp_input)
-        #     input(chunks)
-        # print(chunks)
-        # for np_chunk in np_chunks:
-        #     print(np_chunk)
-        # input()
-
-    # return None
-    # return hypernym_analysis(spacy_sent, np_chunks)
-
-    # if text is not None:
-    #     start_time = time()
-    #     num_total_tokens = 0
-    #
-    #     surface_elements = []
-    #     for sentence in semrep_sent_splitter.split(text):
-    #         spacy_sent = spacynlp(sentence)
-    #         prev_token_index = 0
-    #         prev_lex_record = None
-    #         for token in spacy_sent:
-    #             token_to_lookup = spacy_sent[prev_token_index:token.i + 1].text
-    #             entry = lexaccess.parse(token_to_lookup)
-    #             try:
-    #                 tree = ET.ElementTree(ET.fromstring(entry.strip()))
-    #                 root = tree.getroot()
-    #
-    #                 lexrecords = root.findall('lexRecord')
-    #                 if len(lexrecords) > 0:
-    #                     prev_lex_record = lexrecords
-    #                     continue
-    #             except Exception as e:
-    #                 print('Exception: ' + e)
-    #
-    #             if token_to_lookup != token.i.text:
-    #                 entry = lexaccess.parse(token_to_lookup)
-    #                 try:
-    #                     tree = ET.ElementTree(ET.fromstring(entry.strip()))
-    #                     root = tree.getroot()
-    #
-    #                     lexrecords = root.findall('lexRecord')
-    #                     if len(lexrecords) > 0:
-    #                         prev_lex_record = lexrecords
-    #                         continue
-    #                 except Exception as e:
-    #                     print('Exception: ' + e)
-    #
-    #             # if nothing was found
-    #             if prev_lex_record is not None and prev_token_index == token.i - 1:
-    #                 # print('ww')
-    #                 # print(token.i - 1)
-    #                 surface_elements.append((spacy_sent[prev_token_index:token.i], spacy_sent[token.i - 1], prev_lex_record))
-    #             else:
-    #                 surface_elements.append((spacy_sent[prev_token_index:token.i], spacy_sent[token.i - 1], prev_lex_record))
-    #             prev_token_index = token.i
-    #             prev_lex_record = None
-
-                # token_to_lookup = spacy_sent[prev_token_index:token.i + 1].text
-                # # print(token)
-                # # print(token_to_lookup)
-                # entry = lexaccess.parse(token_to_lookup)
-                # try:
-                #     tree = ET.ElementTree(ET.fromstring(entry.strip()))
-                #     root = tree.getroot()
-                #
-                #     lexrecords = root.findall('lexRecord')
-                #     if len(lexrecords) > 0:
-                #         # print(token_to_lookup)
-                #         prev_lex_record = lexrecords
-                #     else:
-                #         # print('Not found: ' + token_to_lookup)
-                #         # print(token.i)
-                #         # print(prev_token_index)
-                #         # print(prev_token_index == token.i - 1)
-                #         # print(prev_lex_record)
-                #         if prev_lex_record is not None and prev_token_index == token.i - 1:
-                #             # print('ww')
-                #             # print(token.i - 1)
-                #             surface_elements.append((spacy_sent[prev_token_index:token.i], spacy_sent[token.i - 1], prev_lex_record))
-                #         else:
-                #             surface_elements.append((spacy_sent[prev_token_index:token.i], spacy_sent[token.i - 1], prev_lex_record))
-                #         prev_token_index = token.i
-                #         prev_lex_record = None
-                # except Exception as e:
-                #     print('Exception: ' + e)
-
-        # for (el, head, lexrecord) in surface_elements:
-        #     print(f'TEXT: {el.text}')
-        #     print(f'\tHEAD: {head.text}, {head.tag_}, {head.idx}, {head.idx + len(head.text)}')
-        # exit()
 
 
 def setup_nlp_config(nlp_config):
@@ -647,15 +480,16 @@ def setup_nlp_config(nlp_config):
     """
     global spacynlp
     spacynlp = spacy.load(nlp_config['spacy'])
+    spacynlp.add_pipe('lexmatcher', after='parser',
+                      config={'path': nlp_config['lexaccess_path']})
+    spacynlp.add_pipe('concept_match', after = 'lexmatcher',
+                      config = {'ontologies' : nlp_config['ontologies'], 'server_paths' : servers})
+    spacynlp.add_pipe('chunker', after = 'concept_match',
+                      config = {'path' : nlp_config['chunker_path']})
+    spacynlp.add_pipe('hypernym_analysis', after='chunker')
 
-    # sbd = SentenceSegmenter(nlp.vocab, strategy=split_on_newlines)
-    # nlp.add_pipe(sbd, first = True)
-
-    global chunker
-    chunker = ServerProxyClient('localhost', 8080)
-
-    global opennlp
-    opennlp = nlp_config['opennlp']
+    # log the pipeline?
+    print(spacynlp.pipe_names)
 
 def setup_semrep_config(semrep_config):
     """Load SemRep rules and databases
@@ -674,12 +508,6 @@ def setup_semrep_config(semrep_config):
             line = line.strip().split('|')
             ontology_db.append(line)
 
-    global lexaccess
-    lexaccess = LexAccess(config['LEXACCESS'])
-
-    global sentence_splitter
-    sentence_splitter = SemrepSentenceSplitter()
-
 def setup_server_config(server_config):
     """Load NLP preprocessing libraries with the specified configurations
 
@@ -687,7 +515,7 @@ def setup_server_config(server_config):
         nlp_config (dict or configparser.SectionProxy): configuration settings
     """
     global servers
-    servers = server_config
+    servers = dict(server_config)
 
 def process_directory(input_file_format, input_dir_path, output_dir_path = None):
     """Reads and processes files from a directory
@@ -779,9 +607,10 @@ if __name__ == '__main__':
         print('Output path does not exist. Creating directory..')
         os.makedirs(args.output_path)
 
+    setup_server_config(config['SERVERS'])
     setup_nlp_config(config['NLP'])
     setup_semrep_config(config['SEMREP'])
-    setup_server_config(config['SERVERS'])
+
 
     if args.input_format == 'dir':
         process_directory(args.input_file_format, args.input_path, args.output_path)

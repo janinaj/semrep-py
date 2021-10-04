@@ -146,3 +146,3025 @@
     }
   ]
 }
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;36,,12,,C0020538,,Hypertensive disease,,hypertension,,833.3333333333334,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,833.3333333333334,,fndg,,diso,,;;49,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t36_48": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t49_57": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,12,,C0020538,,Hypertensive disease,,hypertension,,1000.0,,dsyn,,diso,,C1963138,,Hypertension Adverse Event,,hypertension,,1000.0,,fndg,,diso,,;;13,,8,,C0030705,,Patients,,patients,,833.3333333333334,,podg,,livb,,;;27,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_12": [
+    {
+      "cui": "C0020538",
+      "name": "Hypertensive disease",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "dsyn"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    },
+    {
+      "cui": "C1963138",
+      "name": "Hypertension Adverse Event",
+      "concept_string": "hypertension",
+      "score": "1000.0",
+      "semtypes": [
+        "fndg"
+      ],
+      "semgroups": [
+        "diso"
+      ]
+    }
+  ],
+  "t13_21": [
+    {
+      "cui": "C0030705",
+      "name": "Patients",
+      "concept_string": "patients",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "podg"
+      ],
+      "semgroups": [
+        "livb"
+      ]
+    }
+  ],
+  "t27_34": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
+0,,9,,C0002771,,Analgesics,,analgesic,,1000.0,,hops::orch::phsu,,tmod::tmod::tmod,,;;10,,7,,C0004057,,Aspirin,,aspirin,,833.3333333333334,,orch::phsu,,tmod::tmod,,;;
+{
+  "t0_9": [
+    {
+      "cui": "C0002771",
+      "name": "Analgesics",
+      "concept_string": "analgesic",
+      "score": "1000.0",
+      "semtypes": [
+        "hops",
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod",
+        "tmod"
+      ]
+    }
+  ],
+  "t10_17": [
+    {
+      "cui": "C0004057",
+      "name": "Aspirin",
+      "concept_string": "aspirin",
+      "score": "833.3333333333334",
+      "semtypes": [
+        "orch",
+        "phsu"
+      ],
+      "semgroups": [
+        "tmod",
+        "tmod"
+      ]
+    }
+  ]
+}
