@@ -5,7 +5,7 @@ class MedlineDocument:
         if isinstance(doc, str):
             self.PMID = None
             self.title = None
-            self.abstract = doc
+            self.abstract = doc.strip()
         elif isinstance(doc, dict):
             self.dict_to_object(doc)
         elif isinstance(doc, etree._Element):

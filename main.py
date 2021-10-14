@@ -23,9 +23,6 @@ import spacy
 
 # create a SemRep class
 
-LEFT_PARENTHESES = ['(', '{', '[']
-RIGHT_PARENTHESES = [')', '}', ']']
-APPOSITIVE_INDICATORS = ['such as', 'particularly', 'in particular', 'including']
 
 def get_head_index(np_chunk):
     return len(np_chunk) - 1
@@ -442,11 +439,14 @@ def process_text(text):
     if text is None:
         return None
 
+    print(f'Processing: {text}')
     doc = spacynlp(text)
-    for lm in doc._.concepts:
-        print(lm.span)
-        print(lm.annotation)
+    # for lm in doc._.relations:
+    # for lm in doc._.concepts:
+    #     print(lm.span)
+    #     print(lm.annotation)
     print(f'len:text:{len(text)},doc:{len(doc)}')
+    print('-' * 50)
 
     sentences = []
     # for sentence in doc.sents:
@@ -486,8 +486,9 @@ def setup_nlp_config(nlp_config):
                       config = {'ontologies' : nlp_config['ontologies'], 'server_paths' : servers})
     spacynlp.add_pipe('chunker', after = 'concept_match',
                       config = {'path' : nlp_config['chunker_path']})
-    spacynlp.add_pipe('hypernym_analysis', after='chunker')
-
+    spacynlp.add_pipe('harmonizer', after='chunker')
+    spacynlp.add_pipe('hypernym_analysis', after='harmonizer')
+    #
     # log the pipeline?
     print(spacynlp.pipe_names)
 
