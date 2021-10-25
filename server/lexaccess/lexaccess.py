@@ -5,6 +5,12 @@ import os.path
 import pexpect
 import time
 
+#don't think this is used
+def print2log(s):
+    import logging
+    logging.info(s)
+    print(s)
+
 class LexAccess():
     def __init__(self, path):
         # spawn the server
@@ -60,11 +66,11 @@ def main():
 
     server = SimpleJSONRPCServer(addr)
 
-    print("Starting LexAccess")
+    print2log("Starting LexAccess")
     nlp = LexAccess(path)
     server.register_function(nlp.parse)
 
-    print("Serving on %s" % uri)
+    print2log("Serving on %s" % uri)
     server.serve_forever()
 	
 if __name__ == '__main__':

@@ -12,6 +12,12 @@ from gnormplus import *
 from metamaplite import *
 from wsd import *
 
+#def print2log(s):
+#    import logging
+#    logging.info(s)
+#    print(s)
+from log2 import print2log
+
 PREDICATIVE_CATEGORIES = set(['NN', 'VB', 'JJ', 'RB', 'PR'])
 HEAD_CATEGORIES = set(['IN', 'WD', 'WP', 'WR'])
 
@@ -170,7 +176,7 @@ class LexMatcherComponent:
         doc._.lexmatches.append(LexiconMatch(text, lexrecords))
 
     def __call__(self, doc: Doc) -> Doc:
-        print('-----Start: lexicon matching-----')
+        print2log('-----Start: lexicon matching-----')
 
         # find a match for each token, either by itself or as part of a phrase
         for sentence in doc.sents:
@@ -211,7 +217,7 @@ class LexMatcherComponent:
             if prev_lexrecords is not None:
                 self.add_match(doc, prev_lexrecords, prev_token_index, cur_token_index)
 
-        print('-----End: lexicon matching-----')
+        print2log('-----End: lexicon matching-----')
 
         return doc
 
@@ -250,11 +256,11 @@ class ConceptMatchComponent:
                     token_start_index = token.i - 1
             else:
                 if token.idx > char_end_index:
-                    print(f'cc: {token}')
-                    print(f'char: {doc[token_start_index: token.i]}')
+                    print2log(f'cc: {token}')
+                    print2log(f'char: {doc[token_start_index: token.i]}')
                     return token_start_index, token.i
         if token_start_index is None:
-            print('Error: out of boundary character indices')
+            print2log('Error: out of boundary character indices')
 
         return token_start_index, len(doc)
 
@@ -268,7 +274,7 @@ class ConceptMatchComponent:
                 return token_start_index, token.i + 1
 
     def __call__(self, doc: Doc) -> Doc:
-        print('-----Start: concept matching-----')
+        print2log('-----Start: concept matching-----')
 
         processes = {}
         with Pool(processes = len(self.ontologies)) as pool:
@@ -316,9 +322,9 @@ class ConceptMatchComponent:
                         token._.concept_index = cur_concept_index
                     cur_concept_index += 1
 
-                    print(f'concept: {doc[token_start_index:token_end_index]} |  matches: {concepts.keys()}')
+                    print2log(f'concept: {doc[token_start_index:token_end_index]} |  matches: {concepts.keys()}')
 
-        print('-----End: lexicon matching-----')
+        print2log('-----End: lexicon matching-----')
 
         return doc
 
@@ -346,7 +352,7 @@ class OpenNLPChunkerComponent:
                opennlp_input += f'{token.text}_{token.tag_} '
             chunks = self.chunker.parse(opennlp_input)
 
-            print(f'OpenNLP output: {chunks}')
+            print2log(f'OpenNLP output: {chunks}')
 
             sentence = Sentence()
 
@@ -397,7 +403,7 @@ class HarmonizerComponent:
         pass
 
     def __call__(self, doc: Doc) -> Doc:
-        print('-----Start: harmonization-----')
+        print2log('-----Start: harmonization-----')
         for sentence in doc._.sentences:
             for chunk in sentence.chunks:
                 i = 0
@@ -413,10 +419,10 @@ class HarmonizerComponent:
                     chunk.words.append(Word(word.span, None, concept))
                     i += len(word.span)
 
-                    print(f'word: {word.span} {word.head} {word.pos_tag}')
+                    print2log(f'word: {word.span} {word.head} {word.pos_tag}')
                 chunk.set_chunk_roles()
 
-        print('-----End: harmonization-----')
+        print2log('-----End: harmonization-----')
 
         return doc
 
@@ -441,7 +447,7 @@ class HypernymAnalysisComponent:
         return None
 
     def __call__(self, doc: Doc) -> Doc:
-        print('-----Start: hypernym analysis-----')
+        print2log('-----Start: hypernym analysis-----')
 
         for sentence in doc._.sentences:
             for i, chunk in enumerate(sentence.chunks):
@@ -449,7 +455,7 @@ class HypernymAnalysisComponent:
                     self.intraNP_hypernymy(chunk, doc)
                     self.interNP_hypernymy(i, sentence, doc)
 
-        print('-----End: hypernym analysis-----')
+        print2log('-----End: hypernym analysis-----')
 
         return doc
 
@@ -517,13 +523,13 @@ class HypernymAnalysisComponent:
         socket_client = SocketClient('ec2-18-223-119-81.us-east-2.compute.amazonaws.com', '12349')
         if socket_client.send(concept_1.annotation['MetamapLite'][0]['cui'] + concept_2.annotation['MetamapLite'][0]['cui'], True) == 'true' and \
                 self.allowed_geoa(concept_1, concept_2):
-            print(f"Hypernymy: {concept_1.annotation['MetamapLite'][0]['concept_string']} is a {concept_2.annotation['MetamapLite'][0]['concept_string']}")
+            print2log(f"Hypernymy: {concept_1.annotation['MetamapLite'][0]['concept_string']} is a {concept_2.annotation['MetamapLite'][0]['concept_string']}")
             doc._.relations.append(Relation(concept_1, 'IS A', concept_2))
 
             return True
         elif both_directions and socket_client.send(concept_2.annotation['MetamapLite'][0]['cui'] + concept_1.annotation['MetamapLite'][0]['cui'], True) == 'true' and \
                 self.allowed_geoa(concept_2, concept_1):
-            print(f"Hypernymy: {concept_2.annotation['MetamapLite'][0]['concept_string']} is a {concept_1.annotation['MetamapLite'][0]['concept_string']}")
+            print2log(f"Hypernymy: {concept_2.annotation['MetamapLite'][0]['concept_string']} is a {concept_1.annotation['MetamapLite'][0]['concept_string']}")
             doc._.relations.append(Relation(concept_2, 'IS A', concept_1))
 
             return True

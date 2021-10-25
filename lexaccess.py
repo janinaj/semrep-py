@@ -2,6 +2,15 @@ import xml.etree.ElementTree as ET
 import re
 import subprocess
 
+#don't think this is used
+def print2log(s):
+    import logging
+    logging.info(s)
+    print(s)
+
+
+PREDICATIVE_CATEGORIES = set(['NN', 'VB', 'JJ', 'RB', 'PR'])
+
 POS_MAPPINGS = {
     'CC' : ['conj'],
     'CD' : ['num'],
@@ -90,7 +99,7 @@ class LexAccess():
     #@functools.lru_cache(maxsize = None)
     def get_matches(self, text):
         ctext= self.normalize_text(text).strip()
-        print(f'lookup:{text}:[{ctext}]')
+        print2log(f'lookup:{text}:[{ctext}]')
 
         if len(ctext) > 0:
             try:
@@ -100,11 +109,11 @@ class LexAccess():
 
                 lexrecords_xml = root.findall('lexRecord')
                 if len(lexrecords_xml) > 0:
-                    print(f'matched: {text}')
+                    print2log(f'matched: {text}')
                     return lexrecords_xml
             except Exception as e:
-                print(e)
-                print(f'LexAccess error: {e}')
+                print2log(e)
+                print2log(f'LexAccess error: {e}')
         return None
 
     def lookup(self, text):  # could make a parse method in class below

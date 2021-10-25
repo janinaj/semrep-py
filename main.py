@@ -21,6 +21,16 @@ from spacy_components import *
 
 import spacy
 
+import logging
+logging.basicConfig(filename='semrep.log',filemode='a', level=logging.INFO)
+def print2log(s):
+    logging.info(s)
+    print(s)
+#in other files, just:
+#from log2 import print2log
+
+PREDICATIVE_CATEGORIES = set(['NN', 'VB', 'JJ', 'RB', 'PR'])
+
 # create a SemRep class
 
 
@@ -71,7 +81,7 @@ def referential_analysis(text, ontologies = [GNormPlus, MetamapLite]):
                 merged_span_range = set(range(merged_start, merged_end))
                 if len(cur_span_range.intersection(merged_span_range)) > 0:
                     # print(f'DONT ADD: {(start, end)}')
-                    print(f'DONT ADD: {(start, end)}')
+                    print2log(f'DONT ADD: {(start, end)}')
                     merge = False
                     break
             if merge:
@@ -179,9 +189,9 @@ def hypernymy(concept_1, concept_2, both_directions = True):
 
     socket_client = SocketClient(HOST, HIERARCHY_PORT)
     if socket_client.send(concept_1['cui'] + concept_2['cui'], True) == 'true':
-        print(f"{concept_1['concept_string']} is a {concept_2['concept_string']}")
+        print2log(f"{concept_1['concept_string']} is a {concept_2['concept_string']}")
     elif both_directions and socket_client.send(concept_2['cui'] + concept_1['cui'], True) == 'true':
-        print(f"{concept_2['concept_string']} is a {concept_1['concept_string']}")
+        print2log(f"{concept_2['concept_string']} is a {concept_1['concept_string']}")
 
 def get_intervening_phrase_type(intervening_phrase, after_phrase):
     if is_appositive(intervening_phrase, after_phrase):
@@ -439,14 +449,14 @@ def process_text(text):
     if text is None:
         return None
 
-    print(f'Processing: {text}')
+    print2log(f'Processing: {text}')
     doc = spacynlp(text)
     # for lm in doc._.relations:
     # for lm in doc._.concepts:
     #     print(lm.span)
     #     print(lm.annotation)
-    print(f'len:text:{len(text)},doc:{len(doc)}')
-    print('-' * 50)
+    print2log(f'len:text:{len(text)},doc:{len(doc)}')
+    print2log('-' * 50)
 
     sentences = []
     # for sentence in doc.sents:
@@ -490,7 +500,7 @@ def setup_nlp_config(nlp_config):
     spacynlp.add_pipe('hypernym_analysis', after='harmonizer')
     #
     # log the pipeline?
-    print(spacynlp.pipe_names)
+    print2log(spacynlp.pipe_names)
 
 def setup_semrep_config(semrep_config):
     """Load SemRep rules and databases
@@ -549,7 +559,7 @@ def process_file(input_file_format, input_file_path, output_file_path = None, mu
     for doc in docs:
         # print('PMID: {}'.format(doc.PMID))
         # print('Title: {}'.format(doc.title))
-        print(f'PMID: {doc.PMID},Title: {doc.title}')
+        print2log(f'PMID: {doc.PMID},Title: {doc.title}')
         if doc.title is not None:
             process_text(doc.title)
         process_text(doc.abstract)
@@ -560,7 +570,7 @@ def process_interactive(output_path = None):
     Args:
         output_path (str): path to the output file (optional)
     """
-    print('Please enter text. Each input will be processed as a single document. Type quit to exit interactive session.')
+    print2log('Please enter text. Each input will be processed as a single document. Type quit to exit interactive session.')
     while True:
         text_input = input()
         if text_input != 'quit':
@@ -583,9 +593,9 @@ if __name__ == '__main__':
     # use config file provided by user, else use default config file
     if args.config_file is None:
         args.config_file = 'default.config'
-        print('No configuration file specified. Using default configuration.')
+        print2log('No configuration file specified. Using default configuration.')
     elif not os.path.exists(args.config_file):
-        print('Unable to locate configuration file. Please check the specified file path.')
+        print2log('Unable to locate configuration file. Please check the specified file path.')
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), args.config_file)
 
     # read config file
@@ -605,7 +615,7 @@ if __name__ == '__main__':
         parser.error("Input path does not exist. Please enter a valid input path.")
 
     if not os.path.exists(args.output_path):
-        print('Output path does not exist. Creating directory..')
+        print2log('Output path does not exist. Creating directory..')
         os.makedirs(args.output_path)
 
     setup_server_config(config['SERVERS'])

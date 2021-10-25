@@ -1,5 +1,14 @@
 from socketclient import SocketClient
 
+#def print2log(s):
+#    import logging
+#    logging.info(s)
+#    print(s)
+from log2 import print2log
+
+
+PREDICATIVE_CATEGORIES = set(['NN', 'VB', 'JJ', 'RB', 'PR'])
+
 class MetamapLite:
     def __init__(self, host, port):
         self.host = host
@@ -10,9 +19,9 @@ class MetamapLite:
         socket_client = SocketClient(self.host, self.port)
         annotations = socket_client.send(text)
         # print(annotations)
-        print(f'annotate:{type(annotations)}')
+        print2log(f'annotate:{type(annotations)}')
         annotations.replace(';;',';\n;') #1st step to being more comparable
-        print(f'annotate:{annotations}')
+        print2log(f'annotate:{annotations}')
         with open("an.tmp", 'a') as f:
             f.write(annotations)
             f.write('\n')
