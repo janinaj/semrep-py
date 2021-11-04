@@ -441,10 +441,32 @@ def process_text(text):
 
     print(f'Processing: {text}')
     doc = spacynlp(text)
-    # for lm in doc._.relations:
-    # for lm in doc._.concepts:
-    #     print(lm.span)
-    #     print(lm.annotation)
+
+    with open('test_output/test.txt', 'w') as o:
+        o.write(f'{doc.text}\n')
+
+    with open('test_output/test.ann', 'w') as o:
+        e = 0
+        ent_indices = []
+        for r, relation in enumerate(doc._.relations):
+            subject_ent_indices = (doc[relation.subject.span.start].idx,
+                                   doc[relation.subject.span.end - 1].idx + len(doc[relation.subject.span.end - 1]))
+            if subject_ent_indices not in ent_indices:
+                subject_index = f'T{e}'
+                o.write(f'{subject_index}\tEntity {subject_ent_indices[0]} {subject_ent_indices[1]}\t{relation.subject.span}\n')
+                ent_indices.append(subject_ent_indices)
+                e += 1
+
+            object_ent_indices = (doc[relation.object.span.start].idx,
+                                   doc[relation.object.span.end - 1].idx + len(doc[relation.object.span.end - 1]))
+            if object_ent_indices not in ent_indices:
+                object_index = f'T{e}'
+                o.write(f'{object_index}\tEntity {object_ent_indices[0]} {object_ent_indices[1]}\t{relation.object.span}\n')
+                ent_indices.append(object_ent_indices)
+                e += 1
+
+            o.write(f'R{r}\t{relation.predicate} Arg1:{subject_index} Arg2:{object_index}\n')
+
     print(f'len:text:{len(text)},doc:{len(doc)}')
     print('-' * 50)
 
@@ -488,6 +510,8 @@ def setup_nlp_config(nlp_config):
                       config = {'path' : nlp_config['chunker_path']})
     spacynlp.add_pipe('harmonizer', after='chunker')
     spacynlp.add_pipe('hypernym_analysis', after='harmonizer')
+    # spacynlp.add_pipe('relational_analysis', after='hypernym_analysis',
+    #                   config = {'ontology_db_path' : ontology_db})
     #
     # log the pipeline?
     print(spacynlp.pipe_names)
@@ -503,11 +527,12 @@ def setup_semrep_config(semrep_config):
     srindicators_list, srindicator_lemmas = parse_semrules_file(semrep_config['semrules'])
 
     global ontology_db
-    ontology_db = []
-    with open(semrep_config['ontology_db'], 'r') as f:
-        for line in f:
-            line = line.strip().split('|')
-            ontology_db.append(line)
+    ontology_db = semrep_config['ontology_db']
+    # ontology_db = []
+    # with open(semrep_config['ontology_db'], 'r') as f:
+    #     for line in f:
+    #         line = line.strip().split('|')
+    #         ontology_db.append(line)
 
 def setup_server_config(server_config):
     """Load NLP preprocessing libraries with the specified configurations
@@ -609,9 +634,8 @@ if __name__ == '__main__':
         os.makedirs(args.output_path)
 
     setup_server_config(config['SERVERS'])
-    setup_nlp_config(config['NLP'])
     setup_semrep_config(config['SEMREP'])
-
+    setup_nlp_config(config['NLP'])
 
     if args.input_format == 'dir':
         process_directory(args.input_file_format, args.input_path, args.output_path)

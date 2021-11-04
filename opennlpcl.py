@@ -41,4 +41,4 @@ class OpenNLP():
             except:
                 pass
             return False
-        return str(results)
+        return results.decode('utf-8')

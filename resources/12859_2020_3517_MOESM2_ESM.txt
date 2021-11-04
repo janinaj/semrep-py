@@ -2695,7 +2695,7 @@ UMLS|biof-process_of-rept
 UMLS|biof-process_of-vtbt
 UMLS|celf-process_of-amph
 UMLS|celf-process_of-anim
-UMLS|celf-process_of-bact
+UMLS|celf-location_of_of-bact
 UMLS|celf-process_of-bird
 UMLS|celf-process_of-emod
 UMLS|celf-process_of-euka
