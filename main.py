@@ -445,6 +445,7 @@ def process_text(text):
     with open('test_output/test.txt', 'w') as o:
         o.write(f'{doc.text}\n')
 
+    # add test comment
     with open('test_output/test.ann', 'w') as o:
         e = 0
         ent_indices = []
