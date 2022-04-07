@@ -11,6 +11,7 @@ from opennlpcl import *
 from gnormplus import *
 from metamaplite import *
 from wsd import *
+from srindicator import *
 
 PREDICATIVE_CATEGORIES = set(['NN', 'VB', 'JJ', 'RB', 'PR'])
 HEAD_CATEGORIES = set(['IN', 'WD', 'WP', 'WR'])
@@ -24,21 +25,40 @@ GEOA_HYPERNYMS = ['country', 'countries', 'islands', 'continent', 'locations', '
 
 MODHEAD_TYPES = ['process_of', 'inverse:uses', 'location_of', 'inverse:part_of', 'inverse:process_of']
 
+VERBS_TAKING_WITH_IN_PASSIVE = ["alleviate","ameliorate","associate","attenuate","control","cotransfect","co-transfect",
+							"eliminate","immunize","manage","mitigate","pretreat","prevent","transfect","treat"]
+
+NOMINAL_SUBJECT_CUES = ["by","with","via"]
+NOMINAL_OBJECT_CUES = ["of"]
+
 def get_pos_category(tag):
     return tag[:2]
 
 class Sentence:
     def __init__(self):
+        self.words = []
         self.chunks = []
 
     def add_chunk(self, chunk):
+        chunk.sentence_index = len(self.chunks)
         self.chunks.append(chunk)
 
+    def get_previous_chunk(self, chunk):
+        if chunk.sentence_index != 0:
+            return self.chunks[chunk.sentence_index - 1]
+        return None
+
+    def get_next_chunk(self, chunk):
+        if chunk.sentence_index != len(self.chunks) - 1:
+            return self.chunks[chunk.sentence_index + 1]
+        return None
+
 class Chunk:
-    def __init__(self, span, chunk_type):
-        self.span = span
+    def __init__(self, chunk_type):
+        # self.span = span
         self.chunk_type = chunk_type
-        self.head_index = None
+        self.sentence_index = None # index of chunk wrt sentence
+        self.head_index = None # index of head word (wrt chunk)
         self.modifiers = []
         self.words = []
 
@@ -46,6 +66,7 @@ class Chunk:
     # def candidates(self):
     #     return [word for word in self.words if word.associated_concept is not None]
 
+    # set a role for each word in the chunk (either head or modifier)
     def set_chunk_roles(self):
         if len(self.words) == 1:
             self.words[0].chunk_role = 'H'
@@ -104,21 +125,60 @@ class Chunk:
                         self.modifiers.append(self.words[i])
             self.modifiers.reverse()
 
+    def is_in_passive_voice(self, sentence):
+        if self.chunk_type != 'VP':
+            return False
+        if not self.words[self.head_index].pos_tag == 'VBN':
+            return False
+
+        current_chunk = self
+        while True:
+            next_chunk = sentence.get_next_chunk(current_chunk)
+            if next_chunk is None:
+                return False
+            if next_chunk.chunk_type == 'ADVP':
+                current_chunk = next_chunk
+                continue
+            else:
+                break
+
+        if next_chunk.chunk_type == 'PP' and next_chunk.words[next_chunk.head_index].pos_tag == 'IN' and \
+                (next_chunk.words[next_chunk.head_index].span.text == 'by' or
+                 (next_chunk.words[next_chunk.head_index].span.text == 'with' and
+                    self.words[self.head_index].span.lemma_ in VERBS_TAKING_WITH_IN_PASSIVE)):
+            return True
+        elif next_chunk.chunk_type == 'VP':
+            next_chunk = sentence.get_next_chunk(next_chunk)
+            if next_chunk is not None:
+                if next_chunk.words[0].lower() == 'using':
+                    return True
+
+        return False
+
+
+
+
 class Word:
-    def __init__(self, spans, chunk_role = None, associated_concept = None):
+    def __init__(self, spans, chunk_role = None, associated_concepts = None):
         # span is a list of spans, for flexibility, i.e., in case of gapped words
         self.span = spans
         self.chunk_role = chunk_role
-        self.associated_concept = associated_concept
+        self.associated_concepts = associated_concepts
 
         self.set_head()
         self.set_pos_tag()
+
+        # self.predicate_index = None
 
     def set_pos_tag(self):
         self.pos_tag = self.head.tag_
 
     def is_entity(self):
-        return self.associated_concept is None
+        return self.associated_concepts is None
+    #
+    # def is_predicate(self):
+    #     if self.predicate_index is not None:
+    #
 
     def set_head(self):
         for i, token in enumerate(self.span):
@@ -143,10 +203,22 @@ class Concept:
         self.annotation = annotation
 
 class Relation:
-    def __init__(self, subject, predicate, object):
+    def __init__(self, subject, predicate, object, indicator):
         self.subject = subject
         self.predicate = predicate
         self.object = object
+        self.indicator = indicator
+
+class Predicate:
+    def __init__(self, word, indicator):
+        self.word = word
+        self.indicator = indicator
+    # def __init__(self, id_, span, type, indicator, sense):
+        # self.id = id_
+        # self.span = span
+        # self.type = type
+        # self.indicator = indicator
+        # self.sense = sense
 
 '''
 This is a pipeline component that looks up tokens in the lexicon.
@@ -322,8 +394,54 @@ class ConceptMatchComponent:
                     cur_concept_index += 1
 
                     print(f'concept: {doc[token_start_index:token_end_index]} |  matches: {concepts.keys()}')
+                    # for token in doc[token_start_index:token_end_index]:
 
-        print('-----End: lexicon matching-----')
+        print('-----End: concept matching-----')
+
+        return doc
+
+
+'''
+This is a pipeline component that combines tokens into "words" based on lexicon and concept matching.
+'''
+@Language.factory('harmonizer')
+def create_harmonizer_component(nlp: Language, name: str):
+    ## add properties used by SemRep
+    Doc.set_extension('sentences', default = [])
+
+    # Doc.set_extension('words', default = [])
+
+    return HarmonizerComponent(nlp)
+
+# TO DO: add lexicon harmonization
+class HarmonizerComponent:
+    def __init__(self, nlp: Language):
+        pass
+
+    def __call__(self, doc: Doc) -> Doc:
+        print('-----Start: harmonization-----')
+
+        for sent in doc.sents:
+            sentence = Sentence()
+
+            i = 0
+            while i < len(sent):
+                token = sent[i]
+                if token._.concept_index is None:
+                    concept = None
+                    word = Word(doc[token.i:token.i + 1])
+                else:
+                    concept = doc._.concepts[token._.concept_index]
+                    word = Word(concept.span)
+
+                sentence.words.append(Word(word.span, None, concept))
+                i += len(word.span)
+
+                print(f'word: {word.span} {word.head} {word.pos_tag}')
+
+            doc._.sentences.append(sentence)
+
+        print('-----End: harmonization-----')
 
         return doc
 
@@ -334,9 +452,6 @@ For now, it uses OpenNLP, but this can be configured to use another chunker.
 '''
 @Language.factory('chunker', default_config = {'chunker': 'opennlp', 'path' : None})
 def create_chunker_component(nlp: Language, name: str, chunker: str, path: str):
-    ## add properties used by SemRep
-    Doc.set_extension('sentences', default = [])
-
     if chunker == 'opennlp':
         return OpenNLPChunkerComponent(nlp, path)
 
@@ -355,127 +470,127 @@ class OpenNLPChunkerComponent:
         self.chunker = OpenNLP(path)
 
     def __call__(self, doc: Doc) -> Doc:
-        current_token_index = 0
-        for sent in doc.sents:
+        for sentence in doc._.sentences:
             opennlp_input = ''
-            for token in sent:
-               opennlp_input += f'{token.text}_{token.tag_} '
+            for word in sentence.words:
+               opennlp_input += f'{word.span.text.replace(" ", "__")}_{word.pos_tag} '
+            print(opennlp_input)
             chunks = self.chunker.parse(opennlp_input).strip()
 
             print(f'OpenNLP output: {chunks}')
 
-            sentence = Sentence()
+            current_word_index = 0
+            for chunk_token in chunks.split():
+                # [ followed by a non-underscore character signifies the start of a new phrase chunk (e.g. NP, VP)
+                if len(chunk_token) > 1 and chunk_token[0] == '[' and chunk_token[1] != '_':
+                    chunk_type = chunk_token[1:]
+                    chunk = Chunk(chunk_type)
 
-            for token in chunks.split():
-                if len(token) > 1 and token[0] == '[' and token[1] != '_':
-                    start_chunk_index = current_token_index
-                    chunk_type = token[1:]
                     in_phrase_chunk = True
-                elif len(token) == 1 and token == ']':
-                    print(f'Chunk: {doc[start_chunk_index: current_token_index]}')
-                    sentence.add_chunk(Chunk(doc[start_chunk_index: current_token_index], chunk_type))
+
+                # ] signifies the end of a phrase chunk
+                elif len(chunk_token) == 1 and chunk_token == ']':
+                    chunk.set_chunk_roles()
+                    sentence.add_chunk(chunk)
+
                     in_phrase_chunk = False
-                elif len(token) == 1:
-                    input(f'Single token (not ]): {token}')
+
+                    print(f'Chunk({chunk.chunk_type}): {[word.span.text for word in chunk.words]}')
+
+                # this case shouldn't happen
+                elif len(chunk_token) == 1:
+                    input(f'Single token (not ]): {chunk_token}')
+
                 else:
-                    if not in_phrase_chunk:
-                        chunk_type = token.rsplit('_')[1]
-                        print(f'Chunk: {doc[current_token_index: current_token_index + 1]}')
-                        sentence.add_chunk(Chunk(doc[current_token_index: current_token_index + 1], chunk_type))
-                    current_token_index += 1
-            if start_chunk_index < current_token_index:
-                print(f'Chunk: {doc[start_chunk_index: current_token_index]}')
-                sentence.add_chunk(Chunk(doc[start_chunk_index: current_token_index], chunk_type))
+                    word_pos = chunk_token.rsplit('_')
+                    num_words = len(word_pos[0].split('__'))
+                    pos = word_pos[1]
 
-            # OLD CHUNKING CODE
+                    words = []
+                    for i in range(current_word_index, current_word_index + num_words):
+                        words.append(sentence.words[i])
 
-            # This code does not work for this type of text, need to fix:
-            # Hypertension patients take[aspirin]].
-            # But for now, it works on most texts.
+                    if in_phrase_chunk:
+                        for i in range(current_word_index, current_word_index + num_words):
+                            chunk.words += words
 
-            # # (?=(\[.*?\]))|(?=(\].*?\[)|(._\.)) --> old regex
-            # # current one fixes issues when text has brackets
-            # # use this for testing: [Vitamin D: synthesis, metabolism, regulation, and an assessment of its deficiency in patients with chronic renal disease].
-            # for chunk in re.findall(r'(?=(\[(?!_).*?\](?!_)))|(?=(\].*?\[)|([\.:]_[\.\:]))', chunks):
-            #     # if actual chunk, e.g. [NP Analgesic_JJ aspirin_NN]
-            #     if len(chunk[0]) > 0:
-            #         chunk = chunk[0].strip()[1:-1].split()
-            #
-            #         chunk_type = chunk[0]
-            #         chunk_tokens = chunk[1:]
-            #
-            #         end_index = cur_token_index + len(chunk_tokens)
-            #         sentence.add_chunk(Chunk(doc[cur_token_index: end_index], chunk_type))
-            #
-            #         print(f'Chunk: {sentence.chunks[-1].span}')
-            #
-            #         cur_token_index = end_index
-            #
-            #     # if space between chunks, i.e. ] [
-            #     # need example for this case
-            #     elif len(chunk[1]) > 0:
-            #         chunk = chunk[1][1:-1].strip()
-            #         if len(chunk) > 0:
-            #             for chunk in chunk.split():
-            #                 end_index = cur_token_index + 1
-            #
-            #                 sentence.add_chunk(Chunk(doc[cur_token_index: end_index], doc[cur_token_index: end_index].text))
-            #
-            #                 print(f'Chunk: {sentence.chunks[-1].span}')
-            #
-            #                 cur_token_index = end_index
-            #
-            #         # cur_token_index + len(chunk.split())
-            #
-            #     elif len(chunk[2]) > 0:
-            #         end_index = cur_token_index + 1
-            #         sentence.add_chunk(Chunk(doc[cur_token_index: end_index], doc[cur_token_index: end_index].text))
-            #
-            #         print(f'Chunk: {sentence.chunks[-1].span}')
-            #
-            #         cur_token_index = end_index
-
-            doc._.sentences.append(sentence)
-
-        return doc
-
-'''
-This is a pipeline component that links together words, concepts, and chunks.
-'''
-@Language.factory('harmonizer')
-def create_harmonizer_component(nlp: Language, name: str):
-    Doc.set_extension('words', default = [])
-
-    return HarmonizerComponent(nlp)
-
-# TO DO: add lexicon harmonization
-class HarmonizerComponent:
-    def __init__(self, nlp: Language):
-        pass
-
-    def __call__(self, doc: Doc) -> Doc:
-        print('-----Start: harmonization-----')
-        for sentence in doc._.sentences:
-            for chunk in sentence.chunks:
-                i = 0
-                while i < len(chunk.span):
-                    token = chunk.span[i]
-                    if token._.concept_index is None:
-                        concept = None
-                        word = Word(doc[token.i:token.i + 1])
                     else:
-                        concept = doc._.concepts[token._.concept_index]
-                        word = Word(concept.span)
+                        chunk_type = pos
+                        chunk = Chunk(chunk_type)
+                        chunk.words = words
+                        chunk.set_chunk_roles()
+                        sentence.add_chunk(chunk)
 
-                    chunk.words.append(Word(word.span, None, concept))
-                    i += len(word.span)
+                        print(f'Chunk({chunk.chunk_type}): {[word.span.text for word in chunk.words]}')
 
-                    print(f'word: {word.span} {word.head} {word.pos_tag}')
+                    current_word_index += num_words
+            if in_phrase_chunk:
                 chunk.set_chunk_roles()
+                sentence.add_chunk(chunk)
 
-        print('-----End: harmonization-----')
+                print(f'Chunk({chunk.chunk_type}): {[word.span.text for word in chunk.words]}')
+
+            # for token in chunks.split():
+            #     if len(token) > 1 and token[0] == '[' and token[1] != '_':
+            #         start_chunk_index = current_token_index
+            #         chunk_type = token[1:]
+            #         in_phrase_chunk = True
+            #     elif len(token) == 1 and token == ']':
+            #         print(f'Chunk: {doc[start_chunk_index: current_token_index]}')
+            #         sentence.add_chunk(Chunk(doc[start_chunk_index: current_token_index], chunk_type))
+            #         in_phrase_chunk = False
+            #         start_chunk_index = None
+            #     elif len(token) == 1:
+            #         input(f'Single token (not ]): {token}')
+            #     else:
+            #         if not in_phrase_chunk:
+            #             chunk_type = token.rsplit('_')[1]
+            #             print(f'Chunk: {doc[current_token_index: current_token_index + 1]}')
+            #             sentence.add_chunk(Chunk(doc[current_token_index: current_token_index + 1], chunk_type))
+            #         current_token_index += 1
+            # if start_chunk_index is not None and start_chunk_index < current_token_index:
+            #     print(f'Chunk: {doc[start_chunk_index: current_token_index]}')
+            #     sentence.add_chunk(Chunk(doc[start_chunk_index: current_token_index], chunk_type))
 
         return doc
+
+# '''
+# This is a pipeline component that links together words, concepts, and chunks.
+# '''
+# @Language.factory('harmonizer')
+# def create_harmonizer_component(nlp: Language, name: str):
+#     Doc.set_extension('words', default = [])
+#
+#     return HarmonizerComponent(nlp)
+#
+# # TO DO: add lexicon harmonization
+# class HarmonizerComponent:
+#     def __init__(self, nlp: Language):
+#         pass
+#
+#     def __call__(self, doc: Doc) -> Doc:
+#         print('-----Start: harmonization-----')
+#         for sentence in doc._.sentences:
+#             for chunk in sentence.chunks:
+#                 i = 0
+#                 while i < len(chunk.span):
+#                     token = chunk.span[i]
+#                     if token._.concept_index is None:
+#                         concept = None
+#                         word = Word(doc[token.i:token.i + 1])
+#                     else:
+#                         concept = doc._.concepts[token._.concept_index]
+#                         word = Word(concept.span)
+#
+#                     chunk.words.append(Word(word.span, None, concept))
+#                     i += len(word.span)
+#
+#                     print(f'word: {word.span} {word.head} {word.pos_tag}')
+#                 chunk.set_chunk_roles()
+#
+#         print('-----End: harmonization-----')
+#
+#         return doc
 
 '''
 This is a pipeline component that extracts hypernym relations.
@@ -512,13 +627,13 @@ class HypernymAnalysisComponent:
         return doc
 
     def intraNP_hypernymy(self, np_chunk, doc):
-        if len(np_chunk.span) == 1:
+        if len(np_chunk.words) == 1:
             return None
 
-        head_concept = np_chunk.words[np_chunk.head_index].associated_concept
+        head_concept = np_chunk.words[np_chunk.head_index].associated_concepts
 
         # identify modifier to the left of head
-        modifier_concept = np_chunk.words[np_chunk.head_index - 1].associated_concept
+        modifier_concept = np_chunk.words[np_chunk.head_index - 1].associated_concepts
 
         self.hypernymy(doc, head_concept, modifier_concept)
 
@@ -536,14 +651,14 @@ class HypernymAnalysisComponent:
 
                 # if next_chunk is not the final chunk, get the chunk after it
                 if i + 1 < len(sentence.chunks):
-                    after_phrase = sentence.chunks[i + 1].span.text.strip()
+                    after_phrase = doc[sentence.chunks[i + 1].words[0].span.start:sentence.chunks[i + 1].words[-1].span.end + 1].text.strip()
                 else:
                     after_phrase = ''
 
                 ip_type = self.get_intervening_phrase_type(np_chunk, next_chunk, after_phrase, doc)
 
-                concept_1 = np_chunk_head.associated_concept
-                concept_2 = next_chunk_head.associated_concept
+                concept_1 = np_chunk_head.associated_concepts
+                concept_2 = next_chunk_head.associated_concepts
 
                 if ip_type == 'APPOS' or ip_type == 'PAREN':
                     self.hypernymy(doc, concept_1, concept_2)
@@ -576,20 +691,20 @@ class HypernymAnalysisComponent:
         if socket_client.send(concept_1.annotation['MetamapLite'][0]['cui'] + concept_2.annotation['MetamapLite'][0]['cui'], True) == 'true' and \
                 self.allowed_geoa(concept_1, concept_2):
             print(f"Hypernymy: {concept_1.annotation['MetamapLite'][0]['concept_string']} is a {concept_2.annotation['MetamapLite'][0]['concept_string']}")
-            doc._.relations.append(Relation(concept_1, 'IS-A', concept_2))
+            doc._.relations.append(Relation(concept_1, 'IS-A', concept_2, 'IS-A'))
 
             return True
         elif both_directions and socket_client.send(concept_2.annotation['MetamapLite'][0]['cui'] + concept_1.annotation['MetamapLite'][0]['cui'], True) == 'true' and \
                 self.allowed_geoa(concept_2, concept_1):
             print(f"Hypernymy: {concept_2.annotation['MetamapLite'][0]['concept_string']} is a {concept_1.annotation['MetamapLite'][0]['concept_string']}")
-            doc._.relations.append(Relation(concept_2, 'IS-A', concept_1))
+            doc._.relations.append(Relation(concept_2, 'IS-A', concept_1, 'IS-A'))
 
             return True
 
         return False
 
     def get_intervening_phrase(self, chunk_1, chunk_2, doc):
-        return doc[chunk_1.span[-1].i + 1:chunk_2.span[0].i]
+        return doc[chunk_1.words[-1].span.end:chunk_2.words[0].span.start]
 
     def get_intervening_phrase_type(self, np_chunk, next_chunk, after_phrase, doc):
         intervening_phrase = self.get_intervening_phrase(np_chunk, next_chunk, doc)
@@ -687,24 +802,136 @@ class HypernymAnalysisComponent:
 This is a pipeline component that extracts other types of relations.
 '''
 @Language.factory('relational_analysis')
-def create_relational_analysis_component(nlp: Language, name: str, ontology_db_path: str):
-    return RelationalAnalysisComponent(nlp, ontology_db_path)
+def create_relational_analysis_component(nlp: Language, name: str, ontology_db_path: str, indicators_file_path: str):
+    return RelationalAnalysisComponent(nlp, ontology_db_path, indicators_file_path)
 
 class RelationalAnalysisComponent:
-    def __init__(self, nlp: Language, ontology_db_path: str):
+    def __init__(self, nlp: Language, ontology_db_path: str, indicators_file_path: str):
         self.ontology_db = []
         with open(ontology_db_path, 'r') as f:
             for line in f:
                 line = line.strip().split('|')[1]
                 self.ontology_db.append(line)
 
+        self.indicators, self.srindicator_lemmas = parse_semrules_file(indicators_file_path)
+        # for indicator in self.srindicators:
+        #     print(indicator.string)
+        #     print(indicator.lexeme)
+        #     print(indicator.verified)
+        #     print(indicator.gap_type)
+        #     print(indicator.type)
+        #     print(indicator.get_most_probable_sense().category)
+        #     for sense in indicator.senses:
+        #         print(f'\t{sense.category}')
+        #         print(f'\t{sense.inverse}')
+        #         print(f'\t{sense.cue}')
+        #         print(f'\t{sense.negated}')
+        #     print()
+        # exit()
+
+    def annotate_gapped(self, doc, indicator, window = 2):
+        for sentence in doc._.sentences:
+            found_first_word = False
+            for word in sentence.words:
+                # assume a max of 2 lexemes
+                # this works for now but double check with java code
+                # in particular the sentence window
+                # also implement prunespan
+                if not found_first_word and word.span.text == indicator.lexeme[0]['lemma']:
+                    found_first_word = True
+                elif found_first_word and word.span.text == indicator.lexeme[1]['lemma']:
+                    if word not in self.annotations:
+                        self.annotations[word] = []
+
+                    #make this into a hash
+                    found = False
+                    for existing_indicator in self.annotations[word]:
+                        if existing_indicator == indicator:
+                            found = True
+                            break
+
+                    if not found:
+                        self.annotations[word].append(indicator)
+
+    def annotate_word(self, doc, indicator):
+        #for now allow multiple annotations all the times
+        self.allow_multiple_annotations = True
+        for sentence in doc._.sentences:
+            for word in sentence.words:
+                #if not allow_multiple_annotations and ...
+                # don't use lemma for now
+                if word.span.text == indicator.lexeme[0]['lemma'] or word.span.lemma_ == indicator.lexeme[0]['lemma'] : # also need to check pos tag, implement ignorepos
+                    # span = word.spans[0]
+                    if word not in self.annotations:
+                        self.annotations[word] = []
+
+                    #make this into a hash
+                    found = False
+                    for existing_indicator in self.annotations[word]:
+                        if existing_indicator == indicator:
+                            found = True
+                            break
+
+                    if not found:
+                        self.annotations[word].append(indicator)
+                # implement posthyphenmatch
+
     def __call__(self, doc: Doc) -> Doc:
+        # might be better to create a separate pipeline component for annotating indicators
+        self.annotations = {}
+        for indicator in self.indicators:
+            # implement ignorePOS
+            if indicator.lexeme_type == 'gapped':
+                #window of multiple sentences?
+                self.annotate_gapped(doc, indicator)
+            elif indicator.lexeme_type == 'multiword':
+                # self.annotate_multiword(doc, indicator)
+                pass
+            else:
+                self.annotate_word(doc, indicator)
+
+        self.predicates = self.annotations
+
+        # self.predicates = {}
+        # for word, indicators in self.annotations.items():
+        #     # print(word)
+        #     # for indicator in indicators:
+        #     #     print(indicator.string)
+        #     #new predicate
+        #     # self.predicates = []
+        #     # for indicator in indicators:
+        #     #     self.predicates.append(Predicate(word, indicator))
+        #     if word not in self.predicates:
+        #         self.predicates[word] = []
+        #     for indicator in indicators:
+        #         self.predicates[word].append(indicator)
+        #      # if ignorePOS:
+        #     #     pass
+
         print('-----Start: relational analysis-----')
 
         for sentence in doc._.sentences:
             for i, chunk in enumerate(sentence.chunks):
                 if chunk.chunk_type == 'NP':
                     self.noun_compound_interpretation(doc, sentence, chunk)
+
+                for word in chunk.words:
+                    if word not in self.predicates:
+                        continue
+
+                    predicates = self.predicates[word] # or should i just make this a property of words'
+
+                    if chunk.chunk_type == 'VP':
+                        self.verbal_interpretation(doc, sentence, predicates, chunk, word)
+                    elif chunk.chunk_type == 'ADJP':
+                        self.adjectival_interpretation(doc, sentence, predicates, chunk, word)
+                    elif chunk.chunk_type == 'PP':
+                        self.prepositional_interpretation(doc, sentence, predicates, chunk, word)
+
+                # if (ch.isVP()) verbalInterpretation(css, ch, preds, se, allCandidates);
+                # if (ch.isADJP()) adjectivalInterpretation(css, ch, preds, se, allCandidates);
+                # if (ch.isPP()) prepositionalInterpretation(css, ch, preds, se, allCandidates);
+                # if (ch.isNP()) nominalInterpretation(css, ch, preds, se, allCandidates);
 
         print('-----End: relational analysis-----')
 
@@ -713,7 +940,7 @@ class RelationalAnalysisComponent:
     # def generate_candidates(self, doc):
     #     candidates = []
     #     for word in doc._.chunks:
-    #         if word.associated_concept is not None:
+    #         if word.associated_concepts is not None:
     #             candidates.append(word)
     #
     #     return candidates
@@ -745,11 +972,58 @@ class RelationalAnalysisComponent:
                         #                                 candidate_pair[0],
                         #                                 candidate_pair[1])
                         return modhead, inverse
+        elif indicator_type == 'NOMINAL':
+            pass
+        else:
+            found = False
+            for predicate in predicates:
+                for sense in predicate.senses:
+                    subject_cue = None
+                    object_cue = None
+                    if sense.cue != '':
+                        if '-' in sense.cue:
+                            split_cue = sense.cue.split('-')
+                            object_cue = split_cue[0]
+                            subject_cue = split_cue[1]
+                        else:
+                            object_cue = sense.cue
+
+                    for candidate_pair in candidate_pairs:
+                        for subject_semtype in candidate_pair['subject']['semtypes']:
+                            for object_semtype in candidate_pair['object']['semtypes']:
+                                if 'subject_cue' in candidate_pair:
+                                    subject_cue_lemma = subject_cue
+                                else:
+                                    subject_cue_lemma = None
+                                if 'object_cue' in candidate_pair:
+                                    object_cue_lemma = object_cue
+                                else:
+                                    object_cue_lemma = None
+
+                                if not sense.inverse and \
+                                    ((object_cue is None and object_cue_lemma is None) or (object_cue  is not None and object_cue == object_cue_lemma)) and \
+                                    self.lookup(subject_semtype, sense.category, object_semtype):
+                                    #generate predication
+                                    doc._.relations.append(Relation(candidate_pair['subject_span'], sense.category, candidate_pair['object_span'], indicator_type))
+                                    return True
+                                    found = True
+                                    break
+                                elif sense.inverse and \
+                                    ((object_cue is None and object_cue_lemma is None) or (object_cue  is not None and object_cue == object_cue_lemma)) and \
+                                    self.lookup(object_semtype, sense.category, subject_semtype):
+                                    doc._.relations.append(Relation(candidate_pair['object_span'], sense.category, candidate_pair['subject_span'], indicator_type))
+                                    return True
+                                    found = True
+                                    break
+                    if found: break
+                if found: break
+            return found
+
         return None, None
 
     def generate_implicit_relation(self, doc, modhead, indicator_type, subject, object):
-        print(f"Noun compound: {subject.annotation['MetamapLite'][0]['concept_string']} {modhead} {object.annotation['MetamapLite'][0]['concept_string']}")
-        doc._.relations.append(Relation(subject, modhead.upper(), object))
+        # print(f"Noun compound: {subject.annotation['MetamapLite'][0]['concept_string']} {modhead} {object.annotation['MetamapLite'][0]['concept_string']}")
+        doc._.relations.append(Relation(subject, modhead.upper(), object, indicator_type))
 
     def noun_compound_interpretation(self, doc, sentence, chunk):
         for i in range(len(chunk.words) - 1, -1, -1):  # in reverse
@@ -758,20 +1032,20 @@ class RelationalAnalysisComponent:
                 # if not surface_element.is_predicate: # filter the surface elements by predicate
                 #     continue
 
-                if word.associated_concept is None:
+                if word.associated_concepts is None:
                     continue
 
-                right_candidates = word.associated_concept.annotation['MetamapLite']
+                right_candidates = word.associated_concepts.annotation['MetamapLite']
 
                 prev_word = chunk.words[i - 1]
-                if not prev_word.chunk_role == 'M' or prev_word.associated_concept is None:
+                if not prev_word.chunk_role == 'M' or prev_word.associated_concepts is None:
                     continue
 
                 hypenated_adj = False
                 left_candidates = []
                 # predicates = []
-
-                # if prev_surface_element.isadjectival and '-' in prev_surface_element.text:
+                #
+                # if prev_word.tag_ = 'ADJ' and '-' in prev_surface_element.text:
                 #     hypenated_adj = True
                 #     entity_span = sentence[prev_surface_element:surface_element.indexof('-')]
                 #     predicate_span = sentence[surface_element.indexof('-'):prev_surface_element.endspan]
@@ -792,7 +1066,7 @@ class RelationalAnalysisComponent:
                 # else
 
 
-                left_candidates = prev_word.associated_concept.annotation['MetamapLite']
+                left_candidates = prev_word.associated_concepts.annotation['MetamapLite']
 
                 # CandidatePair.generateCandidatePairs(leftCands, rightCands)
                 candidate_pairs = []
@@ -803,16 +1077,17 @@ class RelationalAnalysisComponent:
                     # if hypenated_adj:
                     #     found = verifyAndGenerate(doc, sent, preds, pairs, IndicatorType.ADJECTIVE)
                     # else:
+
                 modhead, inverse = self.verify_and_generate(doc, None, candidate_pairs, 'MODHEAD')
                 if modhead is not None:
                     if inverse:
                         self.generate_implicit_relation(doc, modhead, None,
-                                                        word.associated_concept,
-                                                        prev_word.associated_concept)
+                                                        word.associated_concepts,
+                                                        prev_word.associated_concepts)
                     else:
                         self.generate_implicit_relation(doc, modhead, None,
-                                                        prev_word.associated_concept,
-                                                        word.associated_concept)
+                                                        prev_word.associated_concepts,
+                                                        word.associated_concepts)
                     return None
 
         modifiers = []
@@ -841,4 +1116,357 @@ class RelationalAnalysisComponent:
 
                 found = self.verify_and_generate(doc, predicates, candidate_pairs, 'ADJECTIVE')
 
+    def verbal_interpretation(self, doc, sentence, predicates, chunk, word):
+        print('verbal interpretation')
+        passive = False
+        if chunk.is_in_passive_voice(sentence):
+            passive = True
 
+        #previousNP
+        current_chunk = chunk
+        while True:
+            prev = sentence.get_previous_chunk(current_chunk)
+            if prev is None:
+                return None
+            if prev.chunk_type == 'NP':
+                break
+            current_chunk = prev
+
+        #nextCuedNP
+        current_chunk = chunk
+        while True:
+            next = sentence.get_next_chunk(current_chunk)
+            if next is None:
+                return None
+            if next.chunk_type == 'NP':
+                for word in next.words:
+                    found_entity = False
+                    if word.is_entity:
+                        found_entity = True
+                        break
+                if found_entity:
+                    break
+            current_chunk = next
+
+        found = False
+        cue = None
+        while next is not None:
+            word = next.words[next.head_index]
+
+            # if cue is None:
+            #     cue_head = None
+            # else:
+            #     cue_head..
+            # #cuehead
+            # # cue = next.get_cue()
+            # # if cue is not None:
+            # #     cue_head = cue.get_head()
+            # # else:
+            # #     cue_head = None
+
+            right_candidates = word.associated_concepts.annotation['MetamapLite']
+
+            while prev is not None and prev.words[prev.head_index].associated_concepts is not None:
+                left_candidates = prev.words[prev.head_index].associated_concepts.annotation['MetamapLite']
+                if not passive:
+                    candidate_pairs = []
+                    for subj in left_candidates:
+                        for obj in right_candidates:
+                            candidate_pairs.append({'subject' : subj,
+                                                    'subject_span' : prev.words[prev.head_index].associated_concepts,
+                                                    'subject_cue' : None,
+                                                    'object' : obj,
+                                                    'object_span': word.associated_concepts,
+                                                    'object_cue' : None})
+                else:
+                    candidate_pairs = []
+                    for subj in right_candidates:
+                        for obj in left_candidates:
+                            candidate_pairs.append({'subject': subj,
+                                                    'subject_span': word.associated_concepts,
+                                                    'subject_cue': None,
+                                                    'object': obj,
+                                                    'object_span': prev.words[
+                                                        prev.head_index].associated_concepts,
+                                                    'object_cue': None})
+
+                found = self.verify_and_generate(doc, predicates, candidate_pairs, 'VERB')
+
+                if found:
+                    break
+                current_chunk = prev
+                while True:
+                    prev = sentence.get_previous_chunk(current_chunk)
+                    if prev is None:
+                        return None
+                    if prev.chunk_type == 'NP':
+                        break
+                    current_chunk = prev
+
+            if found:
+                return None
+
+            current_chunk = next
+            while True:
+                next = sentence.get_next_chunk(current_chunk)
+                if next is None:
+                    return None
+                if next.chunk_type == 'NP':
+                    for word in next.words:
+                        found_entity = False
+                        if word.is_entity:
+                            found_entity = True
+                            break
+                    if found_entity:
+                        break
+                current_chunk = next
+
+            current_chunk = chunk
+            while True:
+                prev = sentence.get_previous_chunk(current_chunk)
+                if prev is None:
+                    return None
+                if prev.chunk_type == 'NP':
+                    break
+                current_chunk = prev
+
+    def adjectival_interpretation(self, doc, sentence, predicates, chunk, word):
+        print('adjectival interpretation')
+
+        #previousNP
+        current_chunk = chunk
+        while True:
+            prev = sentence.get_previous_chunk(current_chunk)
+            if prev is None:
+                return None
+            if prev.chunk_type == 'NP':
+                break
+            current_chunk = prev
+
+        #nextCuedNP
+        current_chunk = chunk
+        while True:
+            next = sentence.get_next_chunk(current_chunk)
+            if next is None:
+                return None
+            if next.chunk_type == 'NP':
+                for word in next.words:
+                    found_entity = False
+                    if word.is_entity:
+                        found_entity = True
+                        break
+                if found_entity:
+                    break
+            current_chunk = next
+
+        found = False
+        cue = None
+        while next is not None:
+            word = next.words[next.head_index]
+
+            # if cue is None:
+            #     cue_head = None
+            # else:
+            #     cue_head..
+            # #cuehead
+            # # cue = next.get_cue()
+            # # if cue is not None:
+            # #     cue_head = cue.get_head()
+            # # else:
+            # #     cue_head = None
+
+            right_candidates = word.associated_concepts.annotation['MetamapLite']
+
+            while prev is not None and prev.words[prev.head_index].associated_concepts is not None:
+                left_candidates = prev.words[prev.head_index].associated_concepts.annotation['MetamapLite']
+                candidate_pairs = []
+                for subj in left_candidates:
+                    for obj in right_candidates:
+                        candidate_pairs.append({'subject' : subj,
+                                                'subject_span' : prev.words[prev.head_index].associated_concepts,
+                                                'subject_cue' : None,
+                                                'object' : obj,
+                                                'object_span': word.associated_concepts,
+                                                'object_cue' : None})
+
+                found = self.verify_and_generate(doc, predicates, candidate_pairs, 'ADJECTIVE')
+
+                if found:
+                    break
+                current_chunk = prev
+                while True:
+                    prev = sentence.get_previous_chunk(current_chunk)
+                    if prev is None:
+                        return None
+                    if prev.chunk_type == 'NP':
+                        break
+                    current_chunk = prev
+
+            if found:
+                return None
+
+            current_chunk = next
+            while True:
+                next = sentence.get_next_chunk(current_chunk)
+                print(next.sentence_index)
+                if next is None:
+                    return None
+                if next.chunk_type == 'NP':
+                    for word in next.words:
+                        found_entity = False
+                        if word.is_entity:
+                            found_entity = True
+                            break
+                    if found_entity:
+                        break
+                current_chunk = next
+
+            current_chunk = chunk
+            while True:
+                prev = sentence.get_previous_chunk(current_chunk)
+                if prev is None:
+                    return None
+                if prev.chunk_type == 'NP':
+                    break
+                current_chunk = prev
+
+    def prepositional_interpretation(self, doc, sentence, predicates, chunk, word):
+        print('prepositional interpretation')
+
+        # nextNP
+        current_chunk = chunk
+        while True:
+            right = sentence.get_next_chunk(current_chunk)
+            if right is None:
+                return None
+            if right.chunk_type == 'NP':
+                break
+            current_chunk = right
+
+        # previousNP
+        current_chunk = chunk
+        while True:
+            left = sentence.get_previous_chunk(current_chunk)
+            if left is None:
+                return None
+            if left.chunk_type == 'NP':
+                break
+            current_chunk = left
+
+        found = False
+        while left is not None:
+            word = right.words[right.head_index]
+
+            right_candidates = word.associated_concepts.annotation['MetamapLite']
+            left_candidates = left.words[left.head_index].associated_concepts.annotation['MetamapLite']
+            candidate_pairs = []
+            for subj in left_candidates:
+                for obj in right_candidates:
+                    candidate_pairs.append({'subject': subj,
+                                            'subject_span': left.words[left.head_index].associated_concepts,
+                                            'subject_cue': None,
+                                            'object': obj,
+                                            'object_span': word.associated_concepts,
+                                            'object_cue': None})
+
+            found = self.verify_and_generate(doc, predicates, candidate_pairs, 'PREPOSITION')
+
+            if found:
+                return None
+
+            current_chunk = left
+            while True:
+                left = sentence.get_previous_chunk(current_chunk)
+                if left is None:
+                    return None
+                if left.chunk_type == 'NP':
+                    break
+                current_chunk = left
+
+
+    def nominal_interpretation(self, doc, sentence, predicates, chunk, word):
+        print('nominal interpretation')
+
+        right_arg = False
+
+        complements = get_nominal_complements(word)
+        # nextNP
+        current_chunk = chunk
+        while True:
+            right = sentence.get_next_chunk(current_chunk)
+            if right is None:
+                return None
+            if right.chunk_type == 'NP':
+                break
+            current_chunk = right
+
+        # if current_chunk is not None:
+        #     right_cue = current_chunk.cue
+        #
+
+        found = False
+        if right_arg:
+            # // [NOM][PREP SUBJ] [PREP OBJ]
+            # // [NOM][PREP OBJ] [PREP SUBJ]
+            # // [NOM][PREP OBJ] ([SUBJ]) // This does not work, need to modify chunks
+            # // [NOM][PREP OBJ], SUBJ,
+            # // [NOM][PREP OBJ] [BE SUBJ]
+
+            # nextCuedNP
+            right2 = chunk
+            while True:
+                next = sentence.get_next_chunk(current_chunk)
+                if next is None:
+                    return None
+                if next.chunk_type == 'NP':
+                    for word in next.words:
+                        found_entity = False
+                        if word.is_entity:
+                            found_entity = True
+                            break
+                    if found_entity:
+                        break
+                right2 = next
+
+            while right2 is not None:
+                found = self.verify_and_generate(doc, None, candidate_pairs, 'NOMINAL')
+                if found:
+                    break
+
+            # // [SUBJ NOM][PREP OBJ]
+            # // [OBJ NOM][PREP SUBJ]
+            if not found:
+                for i in range(len(chunk.modifiers) - 1, -1, -1):
+                    re1role = nominal_candidate_role(right1cue.head, null, lex_complements)
+                    if re1role == 'S':
+                        pairs = generate_candidate_pairs(right1cands, right1h, right1t,
+                                                         se_cands, None, None)
+                    else:
+                        pairs = generate_candidate_pairs(se_cands, None, None,
+                                                         right1cands, right1h, right1t)
+                    found = self.verify_and_generate(doc, None, pairs, 'NOMINAL')
+                    if found:
+                        break
+
+            # // [SUBJ][PREP NOM] [PREP OBJ]
+            if not found:
+                for i in range(len(chunk.modifiers) - 1, -1, -1):
+                    re1role = nominal_candidate_role(right1cue.head, null, lex_complements)
+                    if re1role == 'S':
+                        pairs = generate_candidate_pairs(right1cands, right1h, right1t,
+                                                         se_cands, None, None)
+                    else:
+                        pairs = generate_candidate_pairs(se_cands, None, None,
+                                                         right1cands, right1h, right1t)
+                    found = self.verify_and_generate(doc, None, pairs, 'NOMINAL')
+                    if found:
+                        break
+
+    def nominal_candidate_role(self, word1, word2, lex_complements):
+        if word1 in NOMINAL_SUBJECT_CUES:
+            return 'S'
+        elif word2 is None or word2 in NOMINAL_SUBJECT_CUES:
+            return 'O'
+        elif word1 in NOMINAL_OBJECT_CUES and word2 in lex_complements:
+            return 'S'
+        return 'O'

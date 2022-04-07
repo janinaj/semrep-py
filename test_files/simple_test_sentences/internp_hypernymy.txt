@@ -2,3 +2,4 @@ BRCA1 gene is a gene.
 BRCA1 is a gene.
 Patients take analgesics such as aspirin.
 Aspirin is an analgesic.
+Hormone-activated steroid receptors

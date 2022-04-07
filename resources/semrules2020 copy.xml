@@ -817,7 +817,7 @@
     <SRIndicator string="coexist" gapType="none" type="l" verified="true">
         <Lexeme lemma="coexist" pos="VB"/>
         <SemInfo category="coexists_with" cue="with" inverse="false" negated="false"/>
-    <Example sentence="Obesity, chronic inflammatory status, and insulin-resistance often coexist in polycystic ovary syndrome." PMID="30013574"/>
+        <SemInfo category="Obesity, chronic inflammatory status, and insulin-resistance often coexist in polycystic ovary syndrome." PMID="30013574"/>
     </SRIndicator>
     <SRIndicator string="cofactor" gapType="none" type="l" verified="true">
         <Lexeme lemma="cofactor" pos="NN"/>
@@ -4403,7 +4403,7 @@
         <SemInfo category="diagnoses" cue="with" inverse="true" negated="false"/>
         <SemInfo category="diagnoses" cue="for" inverse="true" negated="false"/>
         <SemInfo category="diagnoses" cue="for-with" inverse="true" negated="false"/>
-    <Example category="Performance of endoscopic ultrasonography to screen for early gastric cancer with suspected submucosal invasion." PMID="31816675"/>
+        <SemInfo category="Performance of endoscopic ultrasonography to screen for early gastric cancer with suspected submucosal invasion." PMID="31816675"/>
     </SRIndicator>
     <SRIndicator string="screening" gapType="none" type="l" verified="true">
         <Lexeme lemma="screening" pos="NN"/>

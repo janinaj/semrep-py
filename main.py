@@ -16,7 +16,6 @@ sys.path.append('server')
 from sentence_splitter import *
 from socketclient import *
 from serverproxyclient import *
-from srindicator import *
 from spacy_components import *
 
 import spacy
@@ -467,6 +466,7 @@ def process_text(text):
                 e += 1
 
             o.write(f'R{r}\t{relation.predicate} Arg1:{subject_index} Arg2:{object_index}\n')
+            print(f'{relation.subject.span} | {relation.predicate} | {relation.object.span} | {relation.indicator}')
 
     print(f'len:text:{len(text)},doc:{len(doc)}')
     print('-' * 50)
@@ -503,16 +503,22 @@ def setup_nlp_config(nlp_config):
     """
     global spacynlp
     spacynlp = spacy.load(nlp_config['spacy'])
-    spacynlp.add_pipe('lexmatcher', after='parser',
-                      config={'path': nlp_config['lexaccess_path']})
-    spacynlp.add_pipe('concept_match', after = 'lexmatcher',
+
+    # it's probably better if we load the objects (e.g. ontologydb, indicators)
+    # then pass it to the pipeline but still have to figure out how to do this
+
+    # spacynlp.add_pipe('lexmatcher', after='parser',
+    #                   config={'path': nlp_config['lexaccess_path']})
+    spacynlp.add_pipe('concept_match', after = 'parser',
                       config = {'ontologies' : nlp_config['ontologies'], 'server_paths' : servers})
-    spacynlp.add_pipe('chunker', after = 'concept_match',
+    spacynlp.add_pipe('harmonizer', after='concept_match')
+    spacynlp.add_pipe('chunker', after = 'harmonizer',
                       config = {'path' : nlp_config['chunker_path']})
-    spacynlp.add_pipe('harmonizer', after='chunker')
-    spacynlp.add_pipe('hypernym_analysis', after='harmonizer')
-    # spacynlp.add_pipe('relational_analysis', after='hypernym_analysis',
-    #                   config = {'ontology_db_path' : ontology_db})
+
+    spacynlp.add_pipe('hypernym_analysis', after='chunker')
+    spacynlp.add_pipe('relational_analysis', after='hypernym_analysis',
+                      config = {'ontology_db_path' : ontology_db,
+                                'indicators_file_path' : indicators_file})
     #
     # log the pipeline?
     print(spacynlp.pipe_names)
@@ -523,12 +529,16 @@ def setup_semrep_config(semrep_config):
     Args:
         semrep_config (dict or configparser.SectionProxy): file paths of rules/databases
     """
-    global srindicators_list
-    global srindicator_lemmas
-    srindicators_list, srindicator_lemmas = parse_semrules_file(semrep_config['semrules'])
+    # global srindicators_list
+    # global srindicator_lemmas
+    # srindicators_list, srindicator_lemmas = parse_semrules_file(semrep_config['semrules'])
 
     global ontology_db
     ontology_db = semrep_config['ontology_db']
+
+    global indicators_file
+    indicators_file = semrep_config['semrules']
+
     # ontology_db = []
     # with open(semrep_config['ontology_db'], 'r') as f:
     #     for line in f:

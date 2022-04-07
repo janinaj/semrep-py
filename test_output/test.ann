@@ -1,0 +1,3 @@
+T0	Entity 10 17	aspirin
+T1	Entity 0 9	Analgesic
+R0	IS-A Arg1:T0 Arg2:T1
