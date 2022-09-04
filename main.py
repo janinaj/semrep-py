@@ -7,7 +7,7 @@ import re
 import configparser
 
 import json
-
+import nltk
 from medline import *
 from string import punctuation
 
@@ -20,7 +20,7 @@ from srindicator import *
 from spacy_components import *
 
 import spacy
-
+spacy.load('en_core_sci_sm')
 # create a SemRep class
 
 
