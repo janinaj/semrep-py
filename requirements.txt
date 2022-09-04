@@ -9,8 +9,10 @@ soupsieve==2.3.2.post1
 urllib3==1.26.9
 yarg==0.1.9
 jsonrpclib==0.2.1
-spacy==3.4.1
+spacy==2.2.4
 spacy-legacy==3.0.10
 spacy-loggers==1.0.3
-en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.4.0/en_core_web_sm-3.4.0-py3-none-any.whl
 nltk==3.6.6
+lxml==4.9.1
+pexpect==4.8.0
+ptyprocess==0.7.0
